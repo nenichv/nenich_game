@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
 namespace my_game
@@ -20,11 +21,22 @@ namespace my_game
         Point chestSpriteSize;
         float goodSpriteSpeed = 3f;
         float evilSpriteSpeed = 2f;
-        float chestSpriteSpeed;
         bool Pause = false;
         Song music;
         Song songFight;
         Color color = Color.AntiqueWhite;
+        private Matrix screenXform;
+        private readonly Rectangle screenBounds;
+
+        enum GameState
+        {
+            Menu,
+            GamePlay,
+            Pause,
+            EndOfGame,
+        }
+
+        GameState state;
 
         public Game1()
         {
@@ -33,11 +45,15 @@ namespace my_game
             chestSpritePosition = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
             heroSpritePosition = Vector2.Zero;
             banditSpritePosition = new Vector2(0, Window.ClientBounds.Height / 5);
-            
+            var screenScale = graphics.PreferredBackBufferHeight / 1080.0f;
+            screenXform = Matrix.CreateScale(screenScale, screenScale, 1.0f);
+
         }
 
         protected override void Initialize()
         {
+            TouchPanel.DisplayWidth = screenBounds.Width;
+            TouchPanel.DisplayHeight = screenBounds.Height;
             base.Initialize();
         }
 
@@ -66,21 +82,22 @@ namespace my_game
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.X))
-                Exit();
+            if (keyboardState.IsKeyDown(Keys.X)) Exit();
 
             if (keyboardState.IsKeyDown(Keys.E))
             {
-                
+
             }
 
             if (keyboardState.IsKeyDown(Keys.Escape))
             {
                 switch (Pause)
                 {
-                    case false: Pause = true;
+                    case false:
+                        Pause = true;
                         break;
-                    case true: Pause = false;
+                    case true:
+                        Pause = false;
                         break;
                 }
             }
@@ -110,21 +127,23 @@ namespace my_game
                 if (Collide())
                 {
                     color = Color.Red;
+                    MediaPlayer.Stop();
                     MediaPlayer.Play(songFight);
-                    MediaPlayer.IsRepeating = false;
                     MediaPlayer.Play(music);
                 }
                 else color = Color.AntiqueWhite;
 
                 base.Update(gameTime);
+                
             }
         }
 
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(Color.AntiqueWhite);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, screenXform);
 
             spriteBatch.Draw(chest, chestSpritePosition, null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
             spriteBatch.Draw(goodHero, heroSpritePosition, null, color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
@@ -134,6 +153,18 @@ namespace my_game
             spriteBatch.End();
 
             base.Draw(gameTime);
+            switch (state)
+            {
+                case GameState.Menu:
+                    DrawMenu(gameTime);
+                    break;
+                case GameState.GamePlay:
+                    DrawGameplay(gameTime);
+                    break;
+                case GameState.EndOfGame:
+                    DrawEndOfGame(gameTime);
+                    break;
+            }
         }
 
         protected bool Collide()
@@ -144,6 +175,70 @@ namespace my_game
                 (int)banditSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
 
             return goodSpriteRect.Intersects(evilSpriteRect);
+        }
+
+        void UpdateMenu(GameTime gameTime, KeyboardState keyboardState)
+        {
+            // Обрабатывает действия игрока в экране меню
+            if (keyboardState.IsKeyDown(Keys.E))
+                state = GameState.GamePlay;
+        }
+
+        void UpdateGameplay(GameTime gameTime, KeyboardState keyboardState)
+        {
+            // Обновляет состояние игровых объектов, действия игрока.
+            if (keyboardState.IsKeyDown(Keys.X))
+            {
+                switch (Pause)
+                {
+                    case false:
+                        Pause = true;
+                        break;
+                    case true:
+                        Pause = false;
+                        break;
+                }
+                state = GameState.EndOfGame;
+                if (keyboardState.IsKeyDown(Keys.Y)) Exit();
+            }
+        }
+
+        void UpdateEndOfGame(GameTime gameTime, KeyboardState keyboardState)
+        {
+            // Обрабатывает действия игрока, сохраняет результаты
+            if (keyboardState.IsKeyDown(Keys.Escape))
+            {
+                switch (Pause)
+                {
+                    case false:
+                        Pause = true;
+                        break;
+                    case true:
+                        Pause = false;
+                        break;
+                }
+                state = GameState.Menu;
+            }
+            //else if (pushedRestartLevelButton)
+            //{
+                //ResetLevel();
+                //state = GameState.Gameplay;
+            //}
+        }
+
+        void DrawMenu(GameTime gameTime)
+        {
+            // Отрисовка меню, кнопок и т.д.
+        }
+
+        void DrawGameplay(GameTime gameTime)
+        {
+            // Отрисовка игровых объектов, счета и т.д.
+        }
+
+        void DrawEndOfGame(GameTime deltaTime)
+        {
+            // Отрисовка результатов, кнопок и т.д.
         }
     }
 }
