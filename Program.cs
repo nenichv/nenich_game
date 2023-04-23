@@ -1,3 +1,3 @@
 ﻿
-using var game = new my_game.Game1();
+using var game = new superagent.Game1();
 game.Run();

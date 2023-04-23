@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace my_game
+namespace superagent
 {
     public class Game1 : Game
     {
@@ -20,15 +20,17 @@ namespace my_game
         Point banditSpriteSize;
         Point chestSpriteSize;
         float goodSpriteSpeed = 3f;
-        float evilSpriteSpeed = 2f;
+        float evilSpriteSpeed = 9f;
         bool Pause = false;
         Song music;
         Song songFight;
         Color color = Color.AntiqueWhite;
         private Matrix screenXform;
-        private readonly Rectangle screenBounds;
+        public readonly Rectangle screenBounds;
+        SpriteFont textScore;
+        SpriteFont textCollectChests;
 
-        enum GameState
+        public enum GameState
         {
             Menu,
             GamePlay,
@@ -43,7 +45,7 @@ namespace my_game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             chestSpritePosition = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
-            heroSpritePosition = Vector2.Zero;
+            heroSpritePosition = new Vector2(0, 60);
             banditSpritePosition = new Vector2(0, Window.ClientBounds.Height / 5);
             var screenScale = graphics.PreferredBackBufferHeight / 1080.0f;
             screenXform = Matrix.CreateScale(screenScale, screenScale, 1.0f);
@@ -71,6 +73,9 @@ namespace my_game
             songFight = Content.Load<Song>("удар");
             MediaPlayer.Play(music);
             MediaPlayer.IsRepeating = true;
+
+            textScore = Content.Load<SpriteFont>("Score");
+            textCollectChests = Content.Load<SpriteFont>("CollectChests");
         }
 
         protected override void UnloadContent()
@@ -105,7 +110,7 @@ namespace my_game
             if (Pause == false)
             {
                 banditSpritePosition.X += evilSpriteSpeed;
-                if (banditSpritePosition.X > Window.ClientBounds.Width - bandit.Width * 0.1f || banditSpritePosition.X < 0)
+                if (banditSpritePosition.X > Window.ClientBounds.Width * 2.1f || banditSpritePosition.X < 0)
                     evilSpriteSpeed *= -1;
 
                 if (keyboardState.IsKeyDown(Keys.A))
@@ -119,10 +124,10 @@ namespace my_game
 
                 if (heroSpritePosition.X < 0) heroSpritePosition.X = 0;
                 if (heroSpritePosition.Y < 0) heroSpritePosition.Y = 0;
-                if (heroSpritePosition.X > Window.ClientBounds.Width - heroSpriteSize.X)
-                    heroSpritePosition.X = Window.ClientBounds.Width - heroSpriteSize.X;
-                if (heroSpritePosition.Y > Window.ClientBounds.Height - heroSpriteSize.Y)
-                    heroSpritePosition.Y = Window.ClientBounds.Height - heroSpriteSize.Y;
+                if (heroSpritePosition.X > Window.ClientBounds.Width * 2.1f - heroSpriteSize.X)
+                    heroSpritePosition.X = Window.ClientBounds.Width * 2.1f - heroSpriteSize.X;
+                if (heroSpritePosition.Y > Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y)
+                    heroSpritePosition.Y = Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y;
 
                 if (Collide())
                 {
@@ -134,37 +139,32 @@ namespace my_game
                 else color = Color.AntiqueWhite;
 
                 base.Update(gameTime);
-                
+                if (keyboardState.IsKeyDown(Keys.Y)) Exit();
             }
         }
 
         protected override void Draw(GameTime gameTime)
         {
-
             GraphicsDevice.Clear(Color.AntiqueWhite);
-
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, screenXform);
+            Drawing.DrawSprite(spriteBatch, goodHero, bandit, chest,
+            heroSpritePosition, banditSpritePosition, chestSpritePosition, color, screenXform);
+            Drawing.DrawText(spriteBatch, textScore, textCollectChests, Color.Black, screenBounds);
 
-            spriteBatch.Draw(chest, chestSpritePosition, null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
-            spriteBatch.Draw(goodHero, heroSpritePosition, null, color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
-            spriteBatch.Draw(bandit, banditSpritePosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
-            
-
-            spriteBatch.End();
-
-            base.Draw(gameTime);
             switch (state)
             {
                 case GameState.Menu:
-                    DrawMenu(gameTime);
+                    Drawing.DrawMenu(gameTime);
                     break;
                 case GameState.GamePlay:
-                    DrawGameplay(gameTime);
+                    Drawing.DrawGameplay(gameTime);
                     break;
                 case GameState.EndOfGame:
-                    DrawEndOfGame(gameTime);
+                    Drawing.DrawEndOfGame(gameTime);
                     break;
             }
+            spriteBatch.End();
+            base.Draw(gameTime);
         }
 
         protected bool Collide()
@@ -176,15 +176,69 @@ namespace my_game
 
             return goodSpriteRect.Intersects(evilSpriteRect);
         }
+    }
 
-        void UpdateMenu(GameTime gameTime, KeyboardState keyboardState)
+    public class Drawing
+    {
+        public static void DrawCard()
+        {
+            var count = 5;
+            for (int i = 0; i < count; i++)
+            {
+
+                count++;
+            }
+        }
+
+        public static void DrawSprite(SpriteBatch spriteBatch, Texture2D goodHero, 
+            Texture2D bandit, Texture2D chest, Vector2 heroSpritePosition, 
+            Vector2 banditSpritePosition, Vector2 chestSpritePosition, Color color, 
+            Matrix screenXform)
+        {
+            
+            spriteBatch.Draw(chest, chestSpritePosition, null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
+            spriteBatch.Draw(goodHero, heroSpritePosition, null, color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
+            spriteBatch.Draw(bandit, banditSpritePosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
+            
+        }
+
+        public static void DrawText(SpriteBatch spriteBatch, 
+            SpriteFont textScore, SpriteFont textCollectChests, Color color, Rectangle screenBounds)
+        {
+            var positionScore = new Vector2(10, 1030);
+            var positionCollect = new Vector2(800, 10);
+            spriteBatch.DrawString(textScore, "Score: 0", positionScore, color);
+            spriteBatch.DrawString(textCollectChests, 
+                "Your task: collect chests and find exit!", positionCollect, color);
+        }
+
+        public static void DrawMenu(GameTime gameTime)
+        {
+            // Отрисовка меню, кнопок и т.д.
+        }
+
+        public static void DrawGameplay(GameTime gameTime)
+        {
+            // Отрисовка игровых объектов, счета и т.д.
+        }
+
+        public static void DrawEndOfGame(GameTime deltaTime)
+        {
+            // Отрисовка результатов, кнопок и т.д.
+        }
+    }
+
+    public class Update
+    {
+        void UpdateMenu(GameTime gameTime, KeyboardState keyboardState, Game1.GameState state)
         {
             // Обрабатывает действия игрока в экране меню
             if (keyboardState.IsKeyDown(Keys.E))
-                state = GameState.GamePlay;
+                state = Game1.GameState.GamePlay;
         }
 
-        void UpdateGameplay(GameTime gameTime, KeyboardState keyboardState)
+        void UpdateGameplay(GameTime gameTime, KeyboardState keyboardState, 
+            bool Pause, Game1.GameState state)
         {
             // Обновляет состояние игровых объектов, действия игрока.
             if (keyboardState.IsKeyDown(Keys.X))
@@ -198,12 +252,12 @@ namespace my_game
                         Pause = false;
                         break;
                 }
-                state = GameState.EndOfGame;
-                if (keyboardState.IsKeyDown(Keys.Y)) Exit();
+                state = Game1.GameState.EndOfGame;
             }
         }
 
-        void UpdateEndOfGame(GameTime gameTime, KeyboardState keyboardState)
+        void UpdateEndOfGame(GameTime gameTime, KeyboardState keyboardState, 
+            bool Pause, Game1.GameState state)
         {
             // Обрабатывает действия игрока, сохраняет результаты
             if (keyboardState.IsKeyDown(Keys.Escape))
@@ -217,28 +271,13 @@ namespace my_game
                         Pause = false;
                         break;
                 }
-                state = GameState.Menu;
+                state = Game1.GameState.Menu;
             }
             //else if (pushedRestartLevelButton)
             //{
-                //ResetLevel();
-                //state = GameState.Gameplay;
+            //ResetLevel();
+            //state = GameState.Gameplay;
             //}
-        }
-
-        void DrawMenu(GameTime gameTime)
-        {
-            // Отрисовка меню, кнопок и т.д.
-        }
-
-        void DrawGameplay(GameTime gameTime)
-        {
-            // Отрисовка игровых объектов, счета и т.д.
-        }
-
-        void DrawEndOfGame(GameTime deltaTime)
-        {
-            // Отрисовка результатов, кнопок и т.д.
         }
     }
 }
