@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
 namespace superagent
@@ -10,11 +9,14 @@ namespace superagent
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D background;
+        Texture2D backGameover;
         Texture2D goodHero;
         Texture2D bandit;
         Texture2D chest;
         Vector2 heroSpritePosition;
-        Vector2 banditSpritePosition;
+        Vector2 banditOneSpritePosition;
+        Vector2 banditTwoSpritePosition;
         Vector2 chestSpritePosition;
         Point heroSpriteSize;
         Point banditSpriteSize;
@@ -29,6 +31,10 @@ namespace superagent
         public readonly Rectangle screenBounds;
         SpriteFont textScore;
         SpriteFont textCollectChests;
+        SpriteFont textHP;
+        SpriteFont textEnd;
+        int Score = 0;
+        int HP = 100;
 
         public enum GameState
         {
@@ -37,16 +43,15 @@ namespace superagent
             Pause,
             EndOfGame,
         }
-
         GameState state;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            chestSpritePosition = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
-            heroSpritePosition = new Vector2(0, 60);
-            banditSpritePosition = new Vector2(0, Window.ClientBounds.Height / 5);
+            heroSpritePosition = new Vector2(230, 260);
+            banditOneSpritePosition = new Vector2(300, 600);
+            banditTwoSpritePosition = new Vector2(850, 300);
             var screenScale = graphics.PreferredBackBufferHeight / 1080.0f;
             screenXform = Matrix.CreateScale(screenScale, screenScale, 1.0f);
 
@@ -54,28 +59,31 @@ namespace superagent
 
         protected override void Initialize()
         {
-            TouchPanel.DisplayWidth = screenBounds.Width;
-            TouchPanel.DisplayHeight = screenBounds.Height;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            background = Content.Load<Texture2D>("бэк");
+            backGameover = Content.Load<Texture2D>("gameover");
             goodHero = Content.Load<Texture2D>("герой");
             bandit = Content.Load<Texture2D>("враг");
             chest = Content.Load<Texture2D>("сундук");
             heroSpriteSize = new Point(goodHero.Width / 10, goodHero.Height / 10);
             banditSpriteSize = new Point(bandit.Width / 10, bandit.Height / 10);
-            chestSpriteSize = new Point(chest.Width / 10, chest.Height / 10);
-
+            chestSpriteSize = new Point(chest.Width, chest.Height);
             music = Content.Load<Song>("material-fonovogo-zvuka-igrovoy-stsenyi-39470");
             songFight = Content.Load<Song>("удар");
             MediaPlayer.Play(music);
             MediaPlayer.IsRepeating = true;
-
             textScore = Content.Load<SpriteFont>("Score");
             textCollectChests = Content.Load<SpriteFont>("CollectChests");
+            textHP = Content.Load<SpriteFont>("HP");
+            textEnd = Content.Load<SpriteFont>("End");
         }
 
         protected override void UnloadContent()
@@ -91,7 +99,7 @@ namespace superagent
 
             if (keyboardState.IsKeyDown(Keys.E))
             {
-
+                Score += 1;
             }
 
             if (keyboardState.IsKeyDown(Keys.Escape))
@@ -109,8 +117,12 @@ namespace superagent
 
             if (Pause == false)
             {
-                banditSpritePosition.X += evilSpriteSpeed;
-                if (banditSpritePosition.X > Window.ClientBounds.Width * 2.1f || banditSpritePosition.X < 0)
+                banditOneSpritePosition.X += evilSpriteSpeed;
+                if (banditOneSpritePosition.X > 1840 || banditOneSpritePosition.X < 50)
+                    evilSpriteSpeed *= -1;
+
+                banditTwoSpritePosition.Y += evilSpriteSpeed;
+                if (banditTwoSpritePosition.Y > 1000 || banditTwoSpritePosition.Y < 300)
                     evilSpriteSpeed *= -1;
 
                 if (keyboardState.IsKeyDown(Keys.A))
@@ -129,17 +141,25 @@ namespace superagent
                 if (heroSpritePosition.Y > Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y)
                     heroSpritePosition.Y = Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y;
 
-                if (Collide())
+                if (CollideOne())
                 {
                     color = Color.Red;
-                    MediaPlayer.Stop();
+                    HP -= 1;
+                    MediaPlayer.Play(songFight);
+                    MediaPlayer.Play(music);
+                }
+                else color = Color.AntiqueWhite;
+
+                if (CollideTwo())
+                {
+                    color = Color.Red;
+                    HP -= 1;
                     MediaPlayer.Play(songFight);
                     MediaPlayer.Play(music);
                 }
                 else color = Color.AntiqueWhite;
 
                 base.Update(gameTime);
-                if (keyboardState.IsKeyDown(Keys.Y)) Exit();
             }
         }
 
@@ -147,9 +167,18 @@ namespace superagent
         {
             GraphicsDevice.Clear(Color.AntiqueWhite);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, screenXform);
+            Drawing.DrawBackground(spriteBatch, background);
             Drawing.DrawSprite(spriteBatch, goodHero, bandit, chest,
-            heroSpritePosition, banditSpritePosition, chestSpritePosition, color, screenXform);
-            Drawing.DrawText(spriteBatch, textScore, textCollectChests, Color.Black, screenBounds);
+            heroSpritePosition, banditOneSpritePosition, banditTwoSpritePosition, chestSpritePosition, color);
+            Drawing.DrawText(spriteBatch, textScore, textCollectChests, textHP, Color.Black, Score, HP);
+
+            if (HP <= 0)
+            {
+                Pause = true;
+                MediaPlayer.Pause();
+                spriteBatch.Draw(backGameover, new Rectangle(0, 90, 1800, 1150), Color.White);
+                Drawing.DrawEnd(spriteBatch, textEnd);
+            }
 
             switch (state)
             {
@@ -167,12 +196,22 @@ namespace superagent
             base.Draw(gameTime);
         }
 
-        protected bool Collide()
+        protected bool CollideOne()
         {
             Rectangle goodSpriteRect = new Rectangle((int)heroSpritePosition.X,
                 (int)heroSpritePosition.Y, heroSpriteSize.X, heroSpriteSize.Y);
-            Rectangle evilSpriteRect = new Rectangle((int)banditSpritePosition.X,
-                (int)banditSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
+            Rectangle evilSpriteRect = new Rectangle((int)banditOneSpritePosition.X,
+                (int)banditOneSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
+
+            return goodSpriteRect.Intersects(evilSpriteRect);
+        }
+
+        protected bool CollideTwo()
+        {
+            Rectangle goodSpriteRect = new Rectangle((int)heroSpritePosition.X,
+                (int)heroSpritePosition.Y, heroSpriteSize.X, heroSpriteSize.Y);
+            Rectangle evilSpriteRect = new Rectangle((int)banditTwoSpritePosition.X,
+                (int)banditTwoSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
 
             return goodSpriteRect.Intersects(evilSpriteRect);
         }
@@ -180,36 +219,44 @@ namespace superagent
 
     public class Drawing
     {
-        public static void DrawCard()
+        public static void DrawBackground(SpriteBatch spriteBatch, Texture2D background)
         {
-            var count = 5;
-            for (int i = 0; i < count; i++)
-            {
-
-                count++;
-            }
+            spriteBatch.Draw(background, new Rectangle(0, 90, 1800, 1150), Color.White);
         }
 
         public static void DrawSprite(SpriteBatch spriteBatch, Texture2D goodHero, 
             Texture2D bandit, Texture2D chest, Vector2 heroSpritePosition, 
-            Vector2 banditSpritePosition, Vector2 chestSpritePosition, Color color, 
-            Matrix screenXform)
+            Vector2 banditOneSpritePosition, Vector2 banditTwoSpritePosition, Vector2 chestSpritePosition, Color color)
         {
             
-            spriteBatch.Draw(chest, chestSpritePosition, null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
+            spriteBatch.Draw(chest, new Vector2(450, 450), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
+            spriteBatch.Draw(chest, new Vector2(450, 800), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
+            spriteBatch.Draw(chest, new Vector2(1280, 450), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
+            spriteBatch.Draw(chest, new Vector2(1280, 800), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
+
             spriteBatch.Draw(goodHero, heroSpritePosition, null, color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
-            spriteBatch.Draw(bandit, banditSpritePosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
-            
+            spriteBatch.Draw(bandit, banditOneSpritePosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
+            spriteBatch.Draw(bandit, banditTwoSpritePosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
+
+        }
+
+        public static void DrawEnd(SpriteBatch spriteBatch,
+            SpriteFont textEnd)
+        {
+            var positionEnd = new Vector2(130, 1150);
+            spriteBatch.DrawString(textEnd, "Game Over! Press the button X and exit.", positionEnd, Color.WhiteSmoke);
         }
 
         public static void DrawText(SpriteBatch spriteBatch, 
-            SpriteFont textScore, SpriteFont textCollectChests, Color color, Rectangle screenBounds)
+            SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, Color color, int Score, int HP)
         {
-            var positionScore = new Vector2(10, 1030);
-            var positionCollect = new Vector2(800, 10);
-            spriteBatch.DrawString(textScore, "Score: 0", positionScore, color);
+            var positionScore = new Vector2(1620, 1300);
+            var positionCollect = new Vector2(400, 20);
+            var positionHP = new Vector2(10, 1300);
+            spriteBatch.DrawString(textScore, "Score:" + Score, positionScore, color);
             spriteBatch.DrawString(textCollectChests, 
                 "Your task: collect chests and find exit!", positionCollect, color);
+            spriteBatch.DrawString(textScore, "HP:" + HP, positionHP, color);
         }
 
         public static void DrawMenu(GameTime gameTime)
