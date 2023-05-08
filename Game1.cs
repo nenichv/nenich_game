@@ -97,7 +97,11 @@ namespace superagent
 
             if (keyboardState.IsKeyDown(Keys.X)) Exit();
 
-            if (keyboardState.IsKeyDown(Keys.E))
+            if (keyboardState.IsKeyDown(Keys.E) & (
+                (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500) 
+                || (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)
+                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500)
+                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)))
             {
                 Score += 1;
             }
@@ -170,14 +174,13 @@ namespace superagent
             Drawing.DrawBackground(spriteBatch, background);
             Drawing.DrawSprite(spriteBatch, goodHero, bandit, chest,
             heroSpritePosition, banditOneSpritePosition, banditTwoSpritePosition, chestSpritePosition, color);
-            Drawing.DrawText(spriteBatch, textScore, textCollectChests, textHP, Color.Black, Score, HP);
+            Drawing.DrawPlayText(spriteBatch, textScore, textCollectChests, textHP, Color.Black, Score, HP);
 
-            if (HP <= 0)
+            if (HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & Score >= 40) && (heroSpritePosition.X > 1600) &&(heroSpritePosition.Y > 500 || heroSpritePosition.Y > 600))
             {
                 Pause = true;
                 MediaPlayer.Pause();
-                spriteBatch.Draw(backGameover, new Rectangle(0, 90, 1800, 1150), Color.White);
-                Drawing.DrawEnd(spriteBatch, textEnd);
+                Drawing.DrawEndOfGame(spriteBatch, textEnd, Score, backGameover);
             }
 
             switch (state)
@@ -188,9 +191,9 @@ namespace superagent
                 case GameState.GamePlay:
                     Drawing.DrawGameplay(gameTime);
                     break;
-                case GameState.EndOfGame:
-                    Drawing.DrawEndOfGame(gameTime);
-                    break;
+                //case GameState.EndOfGame:
+                    //Drawing.DrawEndOfGame(gameTime);
+                    //break;
             }
             spriteBatch.End();
             base.Draw(gameTime);
@@ -240,14 +243,7 @@ namespace superagent
 
         }
 
-        public static void DrawEnd(SpriteBatch spriteBatch,
-            SpriteFont textEnd)
-        {
-            var positionEnd = new Vector2(130, 1150);
-            spriteBatch.DrawString(textEnd, "Game Over! Press the button X and exit.", positionEnd, Color.WhiteSmoke);
-        }
-
-        public static void DrawText(SpriteBatch spriteBatch, 
+        public static void DrawPlayText(SpriteBatch spriteBatch, 
             SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, Color color, int Score, int HP)
         {
             var positionScore = new Vector2(1620, 1300);
@@ -259,6 +255,16 @@ namespace superagent
             spriteBatch.DrawString(textScore, "HP:" + HP, positionHP, color);
         }
 
+        public static void DrawEndOfGame(SpriteBatch spriteBatch, SpriteFont textEnd, int Score, Texture2D backGameover)
+        {
+            var positionScore = new Vector2(500, 500);
+            var positionConclusion = new Vector2(80, 700);
+            spriteBatch.Draw(backGameover, new Rectangle(0, 0, 1800, 1400), Color.White);
+            spriteBatch.DrawString(textEnd, "You gained " + Score + " points!", positionScore, Color.WhiteSmoke);
+            if (Score >= 40) spriteBatch.DrawString(textEnd, "Congratulations! The first level is passed! ", positionConclusion, Color.WhiteSmoke);
+            else spriteBatch.DrawString(textEnd, "You lose! Press the X to exit!", positionConclusion, Color.WhiteSmoke);
+        }
+
         public static void DrawMenu(GameTime gameTime)
         {
             // Отрисовка меню, кнопок и т.д.
@@ -267,11 +273,6 @@ namespace superagent
         public static void DrawGameplay(GameTime gameTime)
         {
             // Отрисовка игровых объектов, счета и т.д.
-        }
-
-        public static void DrawEndOfGame(GameTime deltaTime)
-        {
-            // Отрисовка результатов, кнопок и т.д.
         }
     }
 
