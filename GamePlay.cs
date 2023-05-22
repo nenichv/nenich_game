@@ -2,7 +2,11 @@
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using superagent;
-using Microsoft.Xna.Framework.Media;
+using EndOfGameSpace;
+using MenuSpace;
+using PauseSpace;
+using HeroSpace;
+using EnemySpace;
 
 namespace GamePlaySpace
 {
@@ -19,13 +23,6 @@ namespace GamePlaySpace
                 Score += 1;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Escape)) GameState = GameState.Pause;
-
-            if (HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & Score >= 40) && (heroSpritePosition.X > 1600) && (heroSpritePosition.Y > 500 || heroSpritePosition.Y > 600))
-            {
-                MediaPlayer.Pause();
-                GameState = GameState.EndOfGame;
-            }
         }
 
         public static void Draw(GameTime gameTime, Texture2D background, SpriteBatch spriteBatch, Texture2D goodHero,

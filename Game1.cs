@@ -48,7 +48,7 @@ namespace superagent
         SpriteFont textEnd;
         int Score = 0;
         int HP = 100;
-        GameState GameState = GameState.Menu;
+        GameState GameState = GameState.GamePlay;
         
         public Game1()
         {
@@ -98,14 +98,29 @@ namespace superagent
             switch (GameState)
             {
                 case GameState.Menu:
-                    Menu.Update(this, gameTime, keyboardState, GameState);
-                    break;
+                    {
+                        Menu.Update(this, gameTime, keyboardState, GameState);
+                        if (keyboardState.IsKeyDown(Keys.Space))
+                            GameState = GameState.GamePlay;
+                        break;
+                    }
                 case GameState.GamePlay:
-                    GamePlay.Update(gameTime, keyboardState, GameState, heroSpritePosition, Score, HP);
-                    break;
+                    {
+                        GamePlay.Update(gameTime, keyboardState, GameState, heroSpritePosition, Score, HP);
+                        if (HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & Score >= 40) && (heroSpritePosition.X > 1600) && (heroSpritePosition.Y > 500 || heroSpritePosition.Y > 600))
+                        {
+                            MediaPlayer.Pause();
+                            GameState = GameState.EndOfGame;
+                        }
+                        if (keyboardState.IsKeyDown(Keys.Escape)) GameState = GameState.Pause;
+                        break;
+                    }
                 case GameState.Pause:
-                    Pause.Update(gameTime, keyboardState, GameState);
-                    break;
+                    {
+                        Pause.Update(gameTime, keyboardState, GameState);
+                        if (keyboardState.IsKeyDown(Keys.Escape)) GameState = GameState.GamePlay;
+                        break;
+                    }
                 case GameState.EndOfGame:
                     EndOfGame.Update(gameTime, keyboardState, GameState);
                     break;
@@ -115,15 +130,16 @@ namespace superagent
 
         protected override void Draw(GameTime gameTime)
         {
+            spriteBatch.Begin();
             switch (GameState)
             {
                 case GameState.Menu:
                     Menu.Draw(gameTime);
                     break;
                 case GameState.GamePlay:
-                    GamePlay.Draw(gameTime, background, spriteBatch, goodHero, bandit, chest, heroSpritePosition, 
-                        banditOneSpritePosition, banditTwoSpritePosition, chestSpritePosition, color,
-                        textScore, textCollectChests, textHP, Score, HP, screenXform);
+                    GamePlay.Draw(gameTime, background, spriteBatch, goodHero, bandit, chest, heroSpritePosition,
+                            banditOneSpritePosition, banditTwoSpritePosition, chestSpritePosition, color,
+                            textScore, textCollectChests, textHP, Score, HP, screenXform);
                     break;
                 case GameState.Pause:
                     Pause.Draw(gameTime);
@@ -132,6 +148,7 @@ namespace superagent
                     EndOfGame.Draw(spriteBatch, textEnd, Score, backGameover);
                     break;
             }
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
