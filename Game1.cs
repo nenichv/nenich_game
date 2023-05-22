@@ -5,6 +5,14 @@ using Microsoft.Xna.Framework.Media;
 
 namespace superagent
 {
+    public enum GameState
+    {
+        Menu,
+        GamePlay,
+        Pause,
+        EndOfGame,
+    }
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -23,7 +31,6 @@ namespace superagent
         Point chestSpriteSize;
         float goodSpriteSpeed = 3f;
         float evilSpriteSpeed = 9f;
-        bool Pause = false;
         Song music;
         Song songFight;
         Color color = Color.AntiqueWhite;
@@ -35,16 +42,8 @@ namespace superagent
         SpriteFont textEnd;
         int Score = 0;
         int HP = 100;
-
-        public enum GameState
-        {
-            Menu,
-            GamePlay,
-            Pause,
-            EndOfGame,
-        }
-        GameState state;
-
+        GameState GameState = GameState.Menu;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -86,85 +85,27 @@ namespace superagent
             textEnd = Content.Load<SpriteFont>("End");
         }
 
-        protected override void UnloadContent()
-        {
-
-        }
-
         protected override void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.X)) Exit();
-
-            if (keyboardState.IsKeyDown(Keys.E) & (
-                (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500) 
-                || (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)
-                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500)
-                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)))
+            switch (GameState)
             {
-                Score += 1;
+                case GameState.Menu:
+                    Menu.Update(this, gameTime, keyboardState, GameState);
+                    break;
+                case GameState.GamePlay:
+                    GamePlay.Update(gameTime, keyboardState, GameState, heroSpritePosition, Score);
+                    break;
+                case GameState.Pause:
+                    Pause.Update(gameTime, keyboardState, GameState);
+                    break;
+                case GameState.EndOfGame:
+                    EndOfGame.Update(gameTime, keyboardState, GameState);
+                    break;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Escape))
-            {
-                switch (Pause)
-                {
-                    case false:
-                        Pause = true;
-                        break;
-                    case true:
-                        Pause = false;
-                        break;
-                }
-            }
-
-            if (Pause == false)
-            {
-                banditOneSpritePosition.X += evilSpriteSpeed;
-                if (banditOneSpritePosition.X > 1840 || banditOneSpritePosition.X < 50)
-                    evilSpriteSpeed *= -1;
-
-                banditTwoSpritePosition.Y += evilSpriteSpeed;
-                if (banditTwoSpritePosition.Y > 1000 || banditTwoSpritePosition.Y < 300)
-                    evilSpriteSpeed *= -1;
-
-                if (keyboardState.IsKeyDown(Keys.A))
-                    heroSpritePosition.X -= goodSpriteSpeed;
-                if (keyboardState.IsKeyDown(Keys.D))
-                    heroSpritePosition.X += goodSpriteSpeed;
-                if (keyboardState.IsKeyDown(Keys.W))
-                    heroSpritePosition.Y -= goodSpriteSpeed;
-                if (keyboardState.IsKeyDown(Keys.S))
-                    heroSpritePosition.Y += goodSpriteSpeed;
-
-                if (heroSpritePosition.X < 0) heroSpritePosition.X = 0;
-                if (heroSpritePosition.Y < 0) heroSpritePosition.Y = 0;
-                if (heroSpritePosition.X > Window.ClientBounds.Width * 2.1f - heroSpriteSize.X)
-                    heroSpritePosition.X = Window.ClientBounds.Width * 2.1f - heroSpriteSize.X;
-                if (heroSpritePosition.Y > Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y)
-                    heroSpritePosition.Y = Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y;
-
-                if (CollideOne())
-                {
-                    color = Color.Red;
-                    HP -= 1;
-                    MediaPlayer.Play(songFight);
-                    MediaPlayer.Play(music);
-                }
-                else color = Color.AntiqueWhite;
-
-                if (CollideTwo())
-                {
-                    color = Color.Red;
-                    HP -= 1;
-                    MediaPlayer.Play(songFight);
-                    MediaPlayer.Play(music);
-                }
-                else color = Color.AntiqueWhite;
-
-                base.Update(gameTime);
-            }
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -176,48 +117,33 @@ namespace superagent
             heroSpritePosition, banditOneSpritePosition, banditTwoSpritePosition, chestSpritePosition, color);
             Drawing.DrawPlayText(spriteBatch, textScore, textCollectChests, textHP, Color.Black, Score, HP);
 
-            if (HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & Score >= 40) && (heroSpritePosition.X > 1600) &&(heroSpritePosition.Y > 500 || heroSpritePosition.Y > 600))
+            if (HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & Score >= 40) && (heroSpritePosition.X > 1600) && (heroSpritePosition.Y > 500 || heroSpritePosition.Y > 600))
             {
-                Pause = true;
                 MediaPlayer.Pause();
-                Drawing.DrawEndOfGame(spriteBatch, textEnd, Score, backGameover);
+                GameState = GameState.EndOfGame;
             }
 
-            switch (state)
+            switch (GameState)
             {
                 case GameState.Menu:
-                    Drawing.DrawMenu(gameTime);
+                    Menu.Draw(gameTime);
                     break;
                 case GameState.GamePlay:
-                    Drawing.DrawGameplay(gameTime);
+                    GamePlay.Draw(gameTime);
                     break;
-                //case GameState.EndOfGame:
-                    //Drawing.DrawEndOfGame(gameTime);
-                    //break;
+                case GameState.Pause:
+                    Pause.Draw(gameTime);
+                    break;
+                case GameState.EndOfGame:
+                    EndOfGame.Draw(spriteBatch, textEnd, Score, backGameover);
+                    break;
+                
             }
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        protected bool CollideOne()
-        {
-            Rectangle goodSpriteRect = new Rectangle((int)heroSpritePosition.X,
-                (int)heroSpritePosition.Y, heroSpriteSize.X, heroSpriteSize.Y);
-            Rectangle evilSpriteRect = new Rectangle((int)banditOneSpritePosition.X,
-                (int)banditOneSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
-
-            return goodSpriteRect.Intersects(evilSpriteRect);
-        }
-
-        protected bool CollideTwo()
-        {
-            Rectangle goodSpriteRect = new Rectangle((int)heroSpritePosition.X,
-                (int)heroSpritePosition.Y, heroSpriteSize.X, heroSpriteSize.Y);
-            Rectangle evilSpriteRect = new Rectangle((int)banditTwoSpritePosition.X,
-                (int)banditTwoSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
-
-            return goodSpriteRect.Intersects(evilSpriteRect);
-        }
+        
     }
 
     public class Drawing
@@ -255,7 +181,69 @@ namespace superagent
             spriteBatch.DrawString(textScore, "HP:" + HP, positionHP, color);
         }
 
-        public static void DrawEndOfGame(SpriteBatch spriteBatch, SpriteFont textEnd, int Score, Texture2D backGameover)
+
+    }
+
+
+    public class Menu
+    {
+        public static void Update(Game1 game, GameTime gameTime, KeyboardState keyboardState, GameState GameState)
+        {
+            if (keyboardState.IsKeyDown(Keys.Escape)) game.Exit();
+            if (keyboardState.IsKeyDown(Keys.Space))
+                GameState = GameState.GamePlay;
+        }
+
+        public static void Draw(GameTime gameTime)
+        {
+            
+        }
+
+    }
+
+    public class GamePlay
+    {
+        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState GameState, Vector2 heroSpritePosition, int Score)
+        {
+            if (keyboardState.IsKeyUp(Keys.E) & (
+                (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500)
+                || (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)
+                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500)
+                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)))
+            {
+                Score += 1;
+            }
+
+            if (keyboardState.IsKeyDown(Keys.Escape)) GameState = GameState.Pause;
+        }
+
+        public static void Draw(GameTime gameTime)
+        {
+
+        }
+    }
+
+    public class Pause
+    {
+        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState GameState)
+        {
+            if (keyboardState.IsKeyDown(Keys.Escape)) GameState = GameState.GamePlay;
+        }
+
+        public static void Draw(GameTime gameTime)
+        {
+
+        }
+    }
+
+    public class EndOfGame
+    {
+        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState state)
+        {
+
+        }
+
+        public static void Draw(SpriteBatch spriteBatch, SpriteFont textEnd, int Score, Texture2D backGameover)
         {
             var positionScore = new Vector2(500, 500);
             var positionConclusion = new Vector2(80, 700);
@@ -263,69 +251,95 @@ namespace superagent
             spriteBatch.DrawString(textEnd, "You gained " + Score + " points!", positionScore, Color.WhiteSmoke);
             if (Score >= 40) spriteBatch.DrawString(textEnd, "Congratulations! The first level is passed! ", positionConclusion, Color.WhiteSmoke);
             else spriteBatch.DrawString(textEnd, "You lose! Press the X to exit!", positionConclusion, Color.WhiteSmoke);
-        }
 
-        public static void DrawMenu(GameTime gameTime)
-        {
-            // Отрисовка меню, кнопок и т.д.
-        }
-
-        public static void DrawGameplay(GameTime gameTime)
-        {
-            // Отрисовка игровых объектов, счета и т.д.
         }
     }
 
-    public class Update
+    public class Enemy
     {
-        void UpdateMenu(GameTime gameTime, KeyboardState keyboardState, Game1.GameState state)
+        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState GameState, Vector2 banditOneSpritePosition, float evilSpriteSpeed, Vector2 banditTwoSpritePosition,
+            int HP, Color color,  Song songFight, Song music)
         {
-            // Обрабатывает действия игрока в экране меню
-            if (keyboardState.IsKeyDown(Keys.E))
-                state = Game1.GameState.GamePlay;
+            banditOneSpritePosition.X += evilSpriteSpeed;
+            if (banditOneSpritePosition.X > 1840 || banditOneSpritePosition.X < 50)
+                evilSpriteSpeed *= -1;
+
+            banditTwoSpritePosition.Y += evilSpriteSpeed;
+            if (banditTwoSpritePosition.Y > 1000 || banditTwoSpritePosition.Y < 300)
+                evilSpriteSpeed *= -1;
         }
 
-        void UpdateGameplay(GameTime gameTime, KeyboardState keyboardState, 
-            bool Pause, Game1.GameState state)
+        
+
+        public static void Draw(GameTime gameTime)
         {
-            // Обновляет состояние игровых объектов, действия игрока.
-            if (keyboardState.IsKeyDown(Keys.X))
+
+        }
+    }
+
+    public class Hero
+    {
+        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState GameState, Vector2 heroSpritePosition, float goodSpriteSpeed, Point heroSpriteSize, GameWindow Window,
+            Vector2 banditOneSpritePosition, Point banditSpriteSize, int HP, Color color, Song songFight, Song music)
+        {
+            if (keyboardState.IsKeyDown(Keys.A))
+                heroSpritePosition.X -= goodSpriteSpeed;
+            if (keyboardState.IsKeyDown(Keys.D))
+                heroSpritePosition.X += goodSpriteSpeed;
+            if (keyboardState.IsKeyDown(Keys.W))
+                heroSpritePosition.Y -= goodSpriteSpeed;
+            if (keyboardState.IsKeyDown(Keys.S))
+                heroSpritePosition.Y += goodSpriteSpeed;
+
+            if (heroSpritePosition.X < 0) heroSpritePosition.X = 0;
+            if (heroSpritePosition.Y < 0) heroSpritePosition.Y = 0;
+            if (heroSpritePosition.X > Window.ClientBounds.Width * 2.1f - heroSpriteSize.X)
+                heroSpritePosition.X = Window.ClientBounds.Width * 2.1f - heroSpriteSize.X;
+            if (heroSpritePosition.Y > Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y)
+                heroSpritePosition.Y = Window.ClientBounds.Height * 2.1f - heroSpriteSize.Y;
+
+            if (CollideOne(heroSpritePosition, banditOneSpritePosition, heroSpriteSize, banditSpriteSize))
             {
-                switch (Pause)
-                {
-                    case false:
-                        Pause = true;
-                        break;
-                    case true:
-                        Pause = false;
-                        break;
-                }
-                state = Game1.GameState.EndOfGame;
+                color = Color.Red;
+                HP -= 1;
+                MediaPlayer.Play(songFight);
+                MediaPlayer.Play(music);
             }
+            else color = Color.AntiqueWhite;
+
+            if (CollideTwo(heroSpritePosition, banditOneSpritePosition, heroSpriteSize, banditSpriteSize))
+            {
+                color = Color.Red;
+                HP -= 1;
+                MediaPlayer.Play(songFight);
+                MediaPlayer.Play(music);
+            }
+            else color = Color.AntiqueWhite;
         }
 
-        void UpdateEndOfGame(GameTime gameTime, KeyboardState keyboardState, 
-            bool Pause, Game1.GameState state)
+        public static  bool CollideOne(Vector2 heroSpritePosition, Vector2 banditOneSpritePosition, Point heroSpriteSize, Point banditSpriteSize)
         {
-            // Обрабатывает действия игрока, сохраняет результаты
-            if (keyboardState.IsKeyDown(Keys.Escape))
-            {
-                switch (Pause)
-                {
-                    case false:
-                        Pause = true;
-                        break;
-                    case true:
-                        Pause = false;
-                        break;
-                }
-                state = Game1.GameState.Menu;
-            }
-            //else if (pushedRestartLevelButton)
-            //{
-            //ResetLevel();
-            //state = GameState.Gameplay;
-            //}
+            Rectangle goodSpriteRect = new Rectangle((int)heroSpritePosition.X,
+                (int)heroSpritePosition.Y, heroSpriteSize.X, heroSpriteSize.Y);
+            Rectangle evilSpriteRect = new Rectangle((int)banditOneSpritePosition.X,
+                (int)banditOneSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
+
+            return goodSpriteRect.Intersects(evilSpriteRect);
+        }
+
+        public static bool CollideTwo(Vector2 heroSpritePosition, Vector2 banditTwoSpritePosition, Point heroSpriteSize, Point banditSpriteSize)
+        {
+            Rectangle goodSpriteRect = new Rectangle((int)heroSpritePosition.X,
+                (int)heroSpritePosition.Y, heroSpriteSize.X, heroSpriteSize.Y);
+            Rectangle evilSpriteRect = new Rectangle((int)banditTwoSpritePosition.X,
+                (int)banditTwoSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
+
+            return goodSpriteRect.Intersects(evilSpriteRect);
+        }
+
+        public static void Draw(GameTime gameTime)
+        {
+
         }
     }
 }
