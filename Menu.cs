@@ -1,20 +1,20 @@
-﻿using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
-using superagent;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MenuSpace
 {
     public class Menu
     {
-        public static void Update(Game1 game, GameTime gameTime, KeyboardState keyboardState, GameState GameState)
+        public static Texture2D Background { get; set; }
+
+        public static void Update()
         {
-            if (keyboardState.IsKeyDown(Keys.Escape)) game.Exit();
             
         }
 
-        public static void Draw(GameTime gameTime)
+        public static void Draw(SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Draw(Background, Vector2.Zero, Color.White);
         }
 
     }

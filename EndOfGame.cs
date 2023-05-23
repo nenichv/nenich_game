@@ -1,18 +1,16 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using superagent;
 
 namespace EndOfGameSpace
 {
     public class EndOfGame
     {
-        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState state)
+        public static void Update()
         {
 
         }
 
-        public static void Draw(SpriteBatch spriteBatch, SpriteFont textEnd, int Score, Texture2D backGameover)
+        public static void Draw(SpriteBatch spriteBatch, SpriteFont textEnd, double Score, Texture2D backGameover)
         {
             var positionScore = new Vector2(500, 500);
             var positionConclusion = new Vector2(80, 700);

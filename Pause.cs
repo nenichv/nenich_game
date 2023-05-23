@@ -1,19 +1,20 @@
-﻿using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
-using superagent;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PauseSpace
 {
     public class Pause
     {
-        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState GameState)
+        public static Texture2D Background { get; set; }
+
+        public static void Update()
         {
             
         }
 
-        public static void Draw(GameTime gameTime)
+        public static void Draw(SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Draw(Background, Vector2.Zero, Color.White);
         }
     }
 }

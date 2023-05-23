@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using superagent;
-using EndOfGameSpace;
-using MenuSpace;
-using PauseSpace;
 using HeroSpace;
 using EnemySpace;
 
@@ -12,29 +8,17 @@ namespace GamePlaySpace
 {
     public class GamePlay
     {
-        public static void Update(GameTime gameTime, KeyboardState keyboardState, GameState GameState, Vector2 heroSpritePosition, int Score, int HP)
+        public static void Update()
         {
-            if (keyboardState.IsKeyUp(Keys.E) & (
-                (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500)
-                || (heroSpritePosition.X > 400 & heroSpritePosition.X < 500) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)
-                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 400 & heroSpritePosition.Y < 500)
-                || (heroSpritePosition.X > 1230 & heroSpritePosition.X < 1290) || (heroSpritePosition.Y > 750 & heroSpritePosition.Y < 850)))
-            {
-                Score += 1;
-            }
-
+            
         }
 
-        public static void Draw(GameTime gameTime, Texture2D background, SpriteBatch spriteBatch, Texture2D goodHero,
-            Texture2D bandit, Texture2D chest, Vector2 heroSpritePosition,
-            Vector2 banditOneSpritePosition, Vector2 banditTwoSpritePosition, Vector2 chestSpritePosition, Color color,
-            SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, int Score, int HP, Matrix screenXform)
+        public static void Draw(Texture2D backGamePlay, SpriteBatch spriteBatch, Texture2D chest, 
+            SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, double Score, int HP)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, screenXform);
-            DrawBackground(spriteBatch, background);
-            DrawSprite(spriteBatch, goodHero, bandit, chest,
-            heroSpritePosition, banditOneSpritePosition, banditTwoSpritePosition, chestSpritePosition, color);
-            DrawPlayText(spriteBatch, textScore, textCollectChests, textHP, Color.Black, Score, HP);
+            DrawBackground(spriteBatch, backGamePlay);
+            DrawSprite(spriteBatch, chest);
+            DrawPlayText(spriteBatch, textScore, textCollectChests, textHP, Color.White, Score, HP);
         }
 
         public static void DrawBackground(SpriteBatch spriteBatch, Texture2D background)
@@ -42,24 +26,17 @@ namespace GamePlaySpace
             spriteBatch.Draw(background, new Rectangle(0, 90, 1800, 1150), Color.White);
         }
 
-        public static void DrawSprite(SpriteBatch spriteBatch, Texture2D goodHero,
-            Texture2D bandit, Texture2D chest, Vector2 heroSpritePosition,
-            Vector2 banditOneSpritePosition, Vector2 banditTwoSpritePosition, Vector2 chestSpritePosition, Color color)
+        public static void DrawSprite(SpriteBatch spriteBatch, Texture2D chest)
         {
 
             spriteBatch.Draw(chest, new Vector2(450, 450), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
             spriteBatch.Draw(chest, new Vector2(450, 800), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
             spriteBatch.Draw(chest, new Vector2(1280, 450), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
             spriteBatch.Draw(chest, new Vector2(1280, 800), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
-
-            spriteBatch.Draw(goodHero, heroSpritePosition, null, color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
-            spriteBatch.Draw(bandit, banditOneSpritePosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
-            spriteBatch.Draw(bandit, banditTwoSpritePosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
-
         }
 
         public static void DrawPlayText(SpriteBatch spriteBatch,
-            SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, Color color, int Score, int HP)
+            SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, Color color, double Score, int HP)
         {
             var positionScore = new Vector2(1620, 1300);
             var positionCollect = new Vector2(400, 20);
