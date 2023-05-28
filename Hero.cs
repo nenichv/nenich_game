@@ -7,43 +7,34 @@ namespace HeroSpace
 {
     public class Hero
     {
-        public static Texture2D GoodHero { get; set; }
+        public static Texture2D TextureHero { get; set; }
         public static Color Color;
-        public static Vector2 HeroSpritePosition;
-        public static float GoodSpriteSpeed = 3f;
-        public static Point HeroSpriteSize;
+        public static Vector2 Position = new Vector2(230, 260);
+        public static float Speed = 3f;
+        public static Point Size;
         public static int HP = 100;
         public static double Score = 0;
 
 
-        public static void Update(KeyboardState keyboardState, GameWindow Window, Vector2 banditOneSpritePosition, Vector2 banditTwoSpritePosition, Point banditSpriteSize, Song songFight, Song music)
+        public static void Update(KeyboardState keyboardState, GameWindow Window, Vector2 firstEnemyPosition, Vector2 secondEnemyPosition, Point enemySize, Song songFight, Song music)
         {
             if (keyboardState.IsKeyDown(Keys.A))
-                HeroSpritePosition.X -= GoodSpriteSpeed;
+                Position.X -= Speed;
             if (keyboardState.IsKeyDown(Keys.D))
-                HeroSpritePosition.X += GoodSpriteSpeed;
+                Position.X += Speed;
             if (keyboardState.IsKeyDown(Keys.W))
-                HeroSpritePosition.Y -= GoodSpriteSpeed;
+                Position.Y -= Speed;
             if (keyboardState.IsKeyDown(Keys.S))
-                HeroSpritePosition.Y += GoodSpriteSpeed;
+                Position.Y += Speed;
 
-            if (HeroSpritePosition.X < 0) HeroSpritePosition.X = 0;
-            if (HeroSpritePosition.Y < 0) HeroSpritePosition.Y = 0;
-            if (HeroSpritePosition.X > Window.ClientBounds.Width * 2.1f - HeroSpriteSize.X)
-                HeroSpritePosition.X = Window.ClientBounds.Width * 2.1f - HeroSpriteSize.X;
-            if (HeroSpritePosition.Y > Window.ClientBounds.Height * 2.1f - HeroSpriteSize.Y)
-                HeroSpritePosition.Y = Window.ClientBounds.Height * 2.1f - HeroSpriteSize.Y;
+            if (Position.X < 0) Position.X = 0;
+            if (Position.Y < 0) Position.Y = 0;
+            if (Position.X > Window.ClientBounds.Width * 2.1f - Size.X)
+                Position.X = Window.ClientBounds.Width * 2.1f - Size.X;
+            if (Position.Y > Window.ClientBounds.Height * 2.1f - Size.Y)
+                Position.Y = Window.ClientBounds.Height * 2.1f - Size.Y;
 
-            if (CollideOne(banditOneSpritePosition, banditSpriteSize))
-            {
-                Color = Color.Red;
-                HP -= 1;
-                MediaPlayer.Play(songFight);
-                MediaPlayer.Play(music);
-            }
-            else Color = Color.AntiqueWhite;
-
-            if (CollideTwo(banditTwoSpritePosition, banditSpriteSize))
+            if (CollideWithEnemy(enemySize, firstEnemyPosition, secondEnemyPosition))
             {
                 Color = Color.Red;
                 HP -= 1;
@@ -53,38 +44,37 @@ namespace HeroSpace
             else Color = Color.AntiqueWhite;
         }
 
-        public static bool CollideOne(Vector2 banditOneSpritePosition, Point banditSpriteSize)
+        public static bool CollideWithEnemy(Point enemySpriteSize, params Vector2[] enemyPositions)
         {
-            Rectangle goodSpriteRect = new Rectangle((int)HeroSpritePosition.X, (int)HeroSpritePosition.Y, HeroSpriteSize.X, HeroSpriteSize.Y);
-            Rectangle evilSpriteRect = new Rectangle((int)banditOneSpritePosition.X, (int)banditOneSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
-
-            return goodSpriteRect.Intersects(evilSpriteRect);
-        }
-
-        public static bool CollideTwo(Vector2 banditTwoSpritePosition, Point banditSpriteSize)
-        {
-            Rectangle goodSpriteRect = new Rectangle((int)HeroSpritePosition.X, (int)HeroSpritePosition.Y, HeroSpriteSize.X, HeroSpriteSize.Y);
-            Rectangle evilSpriteRect = new Rectangle((int)banditTwoSpritePosition.X, (int)banditTwoSpritePosition.Y, banditSpriteSize.X, banditSpriteSize.Y);
-
-            return goodSpriteRect.Intersects(evilSpriteRect);
+            for (int enemy = 0; enemy < enemyPositions.Length ; enemy++)
+            {
+                Rectangle heroRect = new Rectangle((int)Position.X, (int)Position.Y, Size.X, Size.Y);
+                Rectangle enemyRect = new Rectangle((int)enemyPositions[enemy].X, (int)enemyPositions[enemy].Y, enemySpriteSize.X, enemySpriteSize.Y);
+                if (heroRect.Intersects(enemyRect)) return true;
+            }
+            return false;
         }
 
         public static double CollectScore()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.E) & (
-                (HeroSpritePosition.X > 400 & HeroSpritePosition.X < 500) || (HeroSpritePosition.Y > 400 & HeroSpritePosition.Y < 500)
-                || (HeroSpritePosition.X > 400 & HeroSpritePosition.X < 500) || (HeroSpritePosition.Y > 750 & HeroSpritePosition.Y < 850)
-                || (HeroSpritePosition.X > 1230 & HeroSpritePosition.X < 1290) || (HeroSpritePosition.Y > 400 & HeroSpritePosition.Y < 500)
-                || (HeroSpritePosition.X > 1230 & HeroSpritePosition.X < 1290) || (HeroSpritePosition.Y > 750 & HeroSpritePosition.Y < 850)))
-            {
-                Score += 0.1;
-            }
+            if (GetTrueToCollect()) Score += 5;
             return Score;
+        }
+
+        public static bool GetTrueToCollect()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.E) & (
+                (Position.X > 400 & Position.X < 500) || (Position.Y > 400 & Position.Y < 500)
+                || (Position.X > 400 & Position.X < 500) || (Position.Y > 750 & Position.Y < 850)
+                || (Position.X > 1230 & Position.X < 1290) || (Position.Y > 400 & Position.Y < 500)
+                || (Position.X > 1230 & Position.X < 1290) || (Position.Y > 750 & Position.Y < 850))) return true;
+
+            return false;
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GoodHero, HeroSpritePosition, null, Color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
+            spriteBatch.Draw(TextureHero, Position, null, Color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
         }
     }
 }

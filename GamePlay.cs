@@ -1,50 +1,32 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using HeroSpace;
-using EnemySpace;
 
 namespace GamePlaySpace
 {
     public class GamePlay
     {
+        public static Texture2D Background { get; set; }
+        public static SpriteFont TextScore;
+        public static SpriteFont TextCollectChests;
+        public static SpriteFont TextHP;
+
         public static void Update()
         {
             
         }
 
-        public static void Draw(Texture2D backGamePlay, SpriteBatch spriteBatch, Texture2D chest, 
-            SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, double Score, int HP)
+        public static void Draw(SpriteBatch spriteBatch)
         {
-            DrawBackground(spriteBatch, backGamePlay);
-            DrawSprite(spriteBatch, chest);
-            DrawPlayText(spriteBatch, textScore, textCollectChests, textHP, Color.White, Score, HP);
+            spriteBatch.Draw(Background, new Rectangle(0, 90, 1800, 1150), Color.White);
+            DrawText(spriteBatch);
         }
 
-        public static void DrawBackground(SpriteBatch spriteBatch, Texture2D background)
+        public static void DrawText(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, new Rectangle(0, 90, 1800, 1150), Color.White);
-        }
-
-        public static void DrawSprite(SpriteBatch spriteBatch, Texture2D chest)
-        {
-
-            spriteBatch.Draw(chest, new Vector2(450, 450), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
-            spriteBatch.Draw(chest, new Vector2(450, 800), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
-            spriteBatch.Draw(chest, new Vector2(1280, 450), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
-            spriteBatch.Draw(chest, new Vector2(1280, 800), null, Color.White, 0, Vector2.Zero, 0.07f, SpriteEffects.None, 0);
-        }
-
-        public static void DrawPlayText(SpriteBatch spriteBatch,
-            SpriteFont textScore, SpriteFont textCollectChests, SpriteFont textHP, Color color, double Score, int HP)
-        {
-            var positionScore = new Vector2(1620, 1300);
-            var positionCollect = new Vector2(400, 20);
-            var positionHP = new Vector2(10, 1300);
-            spriteBatch.DrawString(textScore, "Score:" + Score, positionScore, color);
-            spriteBatch.DrawString(textCollectChests,
-                "Your task: collect chests and find exit!", positionCollect, color);
-            spriteBatch.DrawString(textScore, "HP:" + HP, positionHP, color);
+            spriteBatch.DrawString(TextScore, "Score:" + Hero.Score, new Vector2(1620, 1300), Color.White);
+            spriteBatch.DrawString(TextCollectChests, "Your task: collect chests and find exit!", new Vector2(400, 20), Color.White);
+            spriteBatch.DrawString(TextScore, "HP:" + Hero.HP, new Vector2(10, 1300), Color.White);
         }
     }
 }

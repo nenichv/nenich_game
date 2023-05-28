@@ -8,6 +8,8 @@ using MenuSpace;
 using PauseSpace;
 using HeroSpace;
 using EnemySpace;
+using Search;
+using ChestSpace;
 
 namespace superagent
 {
@@ -15,6 +17,7 @@ namespace superagent
     {
         Menu,
         GamePlay,
+        Searching,
         Pause,
         EndOfGame,
     }
@@ -22,30 +25,21 @@ namespace superagent
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
+        Searching SearchingObjects;
         SpriteBatch spriteBatch;
-        Texture2D background;
-        Texture2D backGameover;
-        Texture2D chest;
         Song music;
         Song songFight;
+        GameState GameState = GameState.Menu;
         private Matrix screenXform;
         public readonly Rectangle screenBounds;
-        SpriteFont textScore;
-        SpriteFont textCollectChests;
-        SpriteFont textHP;
-        SpriteFont textEnd;
-        GameState GameState = GameState.Menu;
-        
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Hero.HeroSpritePosition = new Vector2(230, 260);
-            Enemy.BanditOneSpritePosition = new Vector2(300, 600);
-            Enemy.BanditTwoSpritePosition = new Vector2(850, 300);
-            var screenScale = graphics.PreferredBackBufferHeight / 1080.0f;
+            var screenScale = graphics.PreferredBackBufferHeight / 1090.0f;
             screenXform = Matrix.CreateScale(screenScale, screenScale, 1.0f);
-
+            IsMouseVisible = true;
         }
 
         protected override void Initialize()
@@ -58,29 +52,42 @@ namespace superagent
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("бэк");
-            backGameover = Content.Load<Texture2D>("gameover");
-            Hero.GoodHero = Content.Load<Texture2D>("герой");
-            Enemy.Bandit = Content.Load<Texture2D>("враг");
-            chest = Content.Load<Texture2D>("сундук");
-            Hero.HeroSpriteSize = new Point(Hero.GoodHero.Width / 10, Hero.GoodHero.Height / 10);
-            Enemy.BanditSpriteSize = new Point(Enemy.Bandit.Width / 10, Enemy.Bandit.Height / 10);
-            music = Content.Load<Song>("material-fonovogo-zvuka-igrovoy-stsenyi-39470");
-            songFight = Content.Load<Song>("удар");
+            Global.spriteBatch = new SpriteBatch(GraphicsDevice);
+            Global.Content = this.Content;
+
+            GamePlay.Background = Content.Load<Texture2D>("backGame");
+            GamePlay.TextScore = Content.Load<SpriteFont>("Score");
+            GamePlay.TextCollectChests = Content.Load<SpriteFont>("CollectChests");
+            GamePlay.TextHP = Content.Load<SpriteFont>("HP");
+
+            Menu.Background = Content.Load<Texture2D>("menu");
+            Pause.Background = Content.Load<Texture2D>("pause");
+
+            EndOfGame.Background = Content.Load<Texture2D>("gameover");
+            EndOfGame.TextEnd = Content.Load<SpriteFont>("End");
+
+            Hero.TextureHero = Content.Load<Texture2D>("hero");
+            Hero.Size = new Point((int)(Hero.TextureHero.Width * 0.13), (int)(Hero.TextureHero.Height * 0.13));
+
+            Enemy.TextureEnemy = Content.Load<Texture2D>("enemy");
+            Enemy.EnemySize = new Point((int)(Enemy.TextureEnemy.Width * 0.09), (int)(Enemy.TextureEnemy.Height * 0.09));
+
+            Chest.TextureChest = Content.Load<Texture2D>("chest");
+            
             MediaPlayer.Play(music);
             MediaPlayer.IsRepeating = true;
-            textScore = Content.Load<SpriteFont>("Score");
-            textCollectChests = Content.Load<SpriteFont>("CollectChests");
-            textHP = Content.Load<SpriteFont>("HP");
-            textEnd = Content.Load<SpriteFont>("End");
-            Menu.Background = Content.Load<Texture2D>("menu");
-            Pause.Background = Content.Load<Texture2D>("PAUSE");
+            
+            music = Content.Load<Song>("music");
+            songFight = Content.Load<Song>("удар");
+
+            var background1 = Content.Load<Texture2D>("search");
+            var arrayObj = new string[] { "apple", "bike" };
+            SearchingObjects = new Searching(background1, "search1\\", arrayObj);
         }
 
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -100,15 +107,23 @@ namespace superagent
                 case GameState.GamePlay:
                     {
                         GamePlay.Update();
-                        Hero.Update(keyboardState, Window, Enemy.BanditOneSpritePosition, Enemy.BanditTwoSpritePosition, Enemy.BanditSpriteSize, songFight, music);
+                        Hero.Update(keyboardState, Window, Enemy.FirstEnemyPosition, Enemy.SecondEnemyPosition, Enemy.EnemySize, songFight, music);
                         Enemy.Update();
+                        Chest.Update();
 
-                        if (Hero.HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & Hero.Score >= 40) && (Hero.HeroSpritePosition.X > 1600) && (Hero.HeroSpritePosition.Y > 500 || Hero.HeroSpritePosition.Y > 600))
+                        if (Hero.HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & Hero.Score >= 40) && (Hero.Position.X > 1600) && (Hero.Position.Y > 500 || Hero.Position.Y > 600))
                         {
                             MediaPlayer.Pause();
                             GameState = GameState.EndOfGame;
                         }
                         if (keyboardState.IsKeyDown(Keys.Escape)) GameState = GameState.Pause;
+                        if (Hero.GetTrueToCollect()) GameState = GameState.Searching;
+                        break;
+                    }
+                case GameState.Searching:
+                    {
+                        SearchingObjects.Update();
+                        if (keyboardState.IsKeyDown(Keys.Enter)) GameState = GameState.GamePlay;
                         break;
                     }
                 case GameState.Pause:
@@ -135,15 +150,19 @@ namespace superagent
                     Menu.Draw(spriteBatch);
                     break;
                 case GameState.GamePlay:
-                    GamePlay.Draw(background, spriteBatch, chest, textScore, textCollectChests, textHP, Hero.CollectScore(), Hero.HP);
+                    GamePlay.Draw(spriteBatch);
                     Hero.Draw(spriteBatch);
                     Enemy.Draw(spriteBatch);
+                    Chest.Draw(spriteBatch);
+                    break;
+                case GameState.Searching:
+                    SearchingObjects.Draw();
                     break;
                 case GameState.Pause:
                     Pause.Draw(spriteBatch);
                     break;
                 case GameState.EndOfGame:
-                    EndOfGame.Draw(spriteBatch, textEnd, Hero.Score, backGameover);
+                    EndOfGame.Draw(spriteBatch);
                     break;
             }
             spriteBatch.End();
