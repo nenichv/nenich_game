@@ -10,12 +10,15 @@ using HeroSpace;
 using EnemySpace;
 using Search;
 using ChestSpace;
+using Tasks;
+using GlobalSpace;
 
 namespace superagent
 {
     public enum GameState
     {
         Menu,
+        Task,
         GamePlay,
         Searching,
         Pause,
@@ -55,33 +58,34 @@ namespace superagent
             Global.spriteBatch = new SpriteBatch(GraphicsDevice);
             Global.Content = this.Content;
 
-            GamePlay.Background = Content.Load<Texture2D>("backGame");
-            GamePlay.TextScore = Content.Load<SpriteFont>("Score");
-            GamePlay.TextCollectChests = Content.Load<SpriteFont>("CollectChests");
-            GamePlay.TextHP = Content.Load<SpriteFont>("HP");
+            GamePlay.Background = Global.Content.Load<Texture2D>("backGame");
+            GamePlay.TextScore = Global.Content.Load<SpriteFont>("Score");
+            GamePlay.TextCollectChests = Global.Content.Load<SpriteFont>("CollectChests");
+            GamePlay.TextHP = Global.Content.Load<SpriteFont>("HP");
 
-            Menu.Background = Content.Load<Texture2D>("menu");
-            Pause.Background = Content.Load<Texture2D>("pause");
+            Menu.Background = Global.Content.Load<Texture2D>("menu");
+            Pause.Background = Global.Content.Load<Texture2D>("pause");
+            Task.Background = Global.Content.Load<Texture2D>("task");
 
-            EndOfGame.Background = Content.Load<Texture2D>("gameover");
-            EndOfGame.TextEnd = Content.Load<SpriteFont>("End");
+            EndOfGame.Background = Global.Content.Load<Texture2D>("gameover");
+            EndOfGame.TextEnd = Global.Content.Load<SpriteFont>("End");
 
-            Hero.TextureHero = Content.Load<Texture2D>("hero");
+            Hero.TextureHero = Global.Content.Load<Texture2D>("hero");
             Hero.Size = new Point((int)(Hero.TextureHero.Width * 0.13), (int)(Hero.TextureHero.Height * 0.13));
 
-            Enemy.TextureEnemy = Content.Load<Texture2D>("enemy");
+            Enemy.TextureEnemy = Global.Content.Load<Texture2D>("enemy");
             Enemy.EnemySize = new Point((int)(Enemy.TextureEnemy.Width * 0.09), (int)(Enemy.TextureEnemy.Height * 0.09));
 
-            Chest.TextureChest = Content.Load<Texture2D>("chest");
+            Chest.TextureChest = Global.Content.Load<Texture2D>("chest");
             
             MediaPlayer.Play(music);
             MediaPlayer.IsRepeating = true;
             
-            music = Content.Load<Song>("music");
-            songFight = Content.Load<Song>("удар");
+            music = Global.Content.Load<Song>("music");
+            songFight = Global.Content.Load<Song>("удар");
 
-            var background1 = Content.Load<Texture2D>("search");
-            var arrayObj = new string[] { "apple", "bike" };
+            var background1 = Global.Content.Load<Texture2D>("search");
+            var arrayObj = new string[] { "redKey", "notebook", "verevka" };
             SearchingObjects = new Searching(background1, "search1\\", arrayObj);
         }
 
@@ -100,8 +104,15 @@ namespace superagent
                     {
                         Menu.Update();
                         if (keyboardState.IsKeyDown(Keys.Space))
-                            GameState = GameState.GamePlay;
+                            GameState = GameState.Task;
                         if (keyboardState.IsKeyDown(Keys.Escape)) Exit();
+                        break;
+                    }
+                case GameState.Task:
+                    {
+                        Task.Update();
+                        if (keyboardState.IsKeyDown(Keys.X)) 
+                            GameState = GameState.GamePlay;
                         break;
                     }
                 case GameState.GamePlay:
@@ -117,6 +128,7 @@ namespace superagent
                             GameState = GameState.EndOfGame;
                         }
                         if (keyboardState.IsKeyDown(Keys.Escape)) GameState = GameState.Pause;
+                        if (keyboardState.IsKeyDown(Keys.X)) GameState = GameState.Task;
                         if (Hero.GetTrueToCollect()) GameState = GameState.Searching;
                         break;
                     }
@@ -143,29 +155,32 @@ namespace superagent
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, screenXform);
+            Global.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, screenXform);
             switch (GameState)
             {
                 case GameState.Menu:
-                    Menu.Draw(spriteBatch);
+                    Menu.Draw();
+                    break;
+                case GameState.Task:
+                    Task.Draw();
                     break;
                 case GameState.GamePlay:
-                    GamePlay.Draw(spriteBatch);
-                    Hero.Draw(spriteBatch);
-                    Enemy.Draw(spriteBatch);
-                    Chest.Draw(spriteBatch);
+                    GamePlay.Draw();
+                    Hero.Draw();
+                    Enemy.Draw();
+                    Chest.Draw();
                     break;
                 case GameState.Searching:
                     SearchingObjects.Draw();
                     break;
                 case GameState.Pause:
-                    Pause.Draw(spriteBatch);
+                    Pause.Draw();
                     break;
                 case GameState.EndOfGame:
-                    EndOfGame.Draw(spriteBatch);
+                    EndOfGame.Draw();
                     break;
             }
-            spriteBatch.End();
+            Global.spriteBatch.End();
             base.Draw(gameTime);
         }
     }

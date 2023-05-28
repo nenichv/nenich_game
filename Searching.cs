@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using SearchObject;
 using System.Collections.Generic;
+using GlobalSpace;
 
 namespace Search
 {

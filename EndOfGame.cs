@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using HeroSpace;
+using GlobalSpace;
 
 namespace EndOfGameSpace
 {
@@ -14,14 +15,14 @@ namespace EndOfGameSpace
 
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw()
         {
             var positionScore = new Vector2(500, 500);
             var positionConclusion = new Vector2(80, 700);
-            spriteBatch.Draw(Background, new Rectangle(0, 0, 1800, 1400), Color.White);
-            spriteBatch.DrawString(TextEnd, "You gained " + Hero.Score + " points!", positionScore, Color.WhiteSmoke);
-            if (Hero.Score >= 40) spriteBatch.DrawString(TextEnd, "Congratulations! The first level is passed! ", positionConclusion, Color.WhiteSmoke);
-            else spriteBatch.DrawString(TextEnd, "You lose! Press the X to exit!", positionConclusion, Color.WhiteSmoke);
+            Global.spriteBatch.Draw(Background, new Rectangle(0, 0, 1800, 1400), Color.White);
+            Global.spriteBatch.DrawString(TextEnd, "You gained " + Hero.Score + " points!", positionScore, Color.WhiteSmoke);
+            if (Hero.Score >= 40) Global.spriteBatch.DrawString(TextEnd, "Congratulations! The first level is passed! ", positionConclusion, Color.WhiteSmoke);
+            else Global.spriteBatch.DrawString(TextEnd, "You lose! Press the X to exit!", positionConclusion, Color.WhiteSmoke);
 
         }
     }

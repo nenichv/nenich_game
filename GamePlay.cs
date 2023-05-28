@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using HeroSpace;
+using GlobalSpace;
 
 namespace GamePlaySpace
 {
@@ -16,17 +17,17 @@ namespace GamePlaySpace
             
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw()
         {
-            spriteBatch.Draw(Background, new Rectangle(0, 90, 1800, 1150), Color.White);
-            DrawText(spriteBatch);
+            Global.spriteBatch.Draw(Background, new Rectangle(0, 90, 1800, 1150), Color.White);
+            DrawText();
         }
 
-        public static void DrawText(SpriteBatch spriteBatch)
+        public static void DrawText()
         {
-            spriteBatch.DrawString(TextScore, "Score:" + Hero.Score, new Vector2(1620, 1300), Color.White);
-            spriteBatch.DrawString(TextCollectChests, "Your task: collect chests and find exit!", new Vector2(400, 20), Color.White);
-            spriteBatch.DrawString(TextScore, "HP:" + Hero.HP, new Vector2(10, 1300), Color.White);
+            Global.spriteBatch.DrawString(TextScore, "Score:" + Hero.Score, new Vector2(1620, 1300), Color.White);
+            Global.spriteBatch.DrawString(TextCollectChests, "Your task: collect chests and find exit!", new Vector2(400, 20), Color.White);
+            Global.spriteBatch.DrawString(TextScore, "HP:" + Hero.HP, new Vector2(10, 1300), Color.White);
         }
     }
 }

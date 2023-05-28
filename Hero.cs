@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GlobalSpace;
 
 namespace HeroSpace
 {
@@ -42,6 +43,8 @@ namespace HeroSpace
                 MediaPlayer.Play(music);
             }
             else Color = Color.AntiqueWhite;
+
+            Score = CollectScore();
         }
 
         public static bool CollideWithEnemy(Point enemySpriteSize, params Vector2[] enemyPositions)
@@ -57,7 +60,11 @@ namespace HeroSpace
 
         public static double CollectScore()
         {
-            if (GetTrueToCollect()) Score += 5;
+            if (Keyboard.GetState().IsKeyDown(Keys.C) & (
+                (Position.X > 400 & Position.X < 500) || (Position.Y > 400 & Position.Y < 500)
+                || (Position.X > 400 & Position.X < 500) || (Position.Y > 750 & Position.Y < 850)
+                || (Position.X > 1230 & Position.X < 1290) || (Position.Y > 400 & Position.Y < 500)
+                || (Position.X > 1230 & Position.X < 1290) || (Position.Y > 750 & Position.Y < 850))) Score += 5;
             return Score;
         }
 
@@ -72,9 +79,9 @@ namespace HeroSpace
             return false;
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw()
         {
-            spriteBatch.Draw(TextureHero, Position, null, Color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
+            Global.spriteBatch.Draw(TextureHero, Position, null, Color, 0, Vector2.Zero, 0.13f, SpriteEffects.None, 0);
         }
     }
 }

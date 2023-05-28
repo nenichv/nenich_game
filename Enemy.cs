@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GlobalSpace;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace EnemySpace
@@ -21,10 +22,10 @@ namespace EnemySpace
             if (SecondEnemyPosition.Y > 1000 || SecondEnemyPosition.Y < 300)  EnemySpeed *= -1;
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw()
         {
-            spriteBatch.Draw(TextureEnemy, FirstEnemyPosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
-            spriteBatch.Draw(TextureEnemy, SecondEnemyPosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
+            Global.spriteBatch.Draw(TextureEnemy, FirstEnemyPosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
+            Global.spriteBatch.Draw(TextureEnemy, SecondEnemyPosition, null, Color.White, 0, Vector2.Zero, 0.09f, SpriteEffects.None, 0);
         }
     }
 }

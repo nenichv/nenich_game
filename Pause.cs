@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GlobalSpace;
 
 namespace PauseSpace
 {
@@ -12,9 +13,9 @@ namespace PauseSpace
             
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw()
         {
-            spriteBatch.Draw(Background, Vector2.Zero, Color.White);
+            Global.spriteBatch.Draw(Background, Vector2.Zero, Color.White);
         }
     }
 }
