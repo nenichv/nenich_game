@@ -1,0 +1,153 @@
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\CollectChests.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\material-fonovogo-zvuka-igrovoy-stsenyi-39470.ogg
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\material-fonovogo-zvuka-igrovoy-stsenyi-39470.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Score.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\text.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\враг.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\герой.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\картинка-поиск.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\сундук.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\удар.ogg
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\удар.xnb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.exe
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.deps.json
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.runtimeconfig.json
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.dll
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.pdb
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\MonoGame.Framework.dll
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\linux-x64\native\libopenal.so.1
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\osx\native\libSDL2.dylib
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\osx\native\libopenal.1.dylib
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x64\native\SDL2.dll
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x64\native\soft_oal.dll
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x86\native\SDL2.dll
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x86\native\soft_oal.dll
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.csproj.AssemblyReference.cache
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.GeneratedMSBuildEditorConfig.editorconfig
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.AssemblyInfoInputs.cache
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.AssemblyInfo.cs
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.csproj.CoreCompileInputs.cache
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.csproj.CopyComplete
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.dll
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\refint\superagent.dll
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.pdb
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.genruntimeconfig.cache
+M:\projects\my game\vs\my_game\obj\Debug\net6.0\ref\superagent.dll
+M:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\бэк.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\text.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\герой.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.exe
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.deps.json
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.runtimeconfig.json
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.dll
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\superagent.pdb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\MonoGame.Framework.dll
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\linux-x64\native\libopenal.so.1
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\osx\native\libSDL2.dylib
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\osx\native\libopenal.1.dylib
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x64\native\SDL2.dll
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x64\native\soft_oal.dll
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x86\native\SDL2.dll
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\runtimes\win-x86\native\soft_oal.dll
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.csproj.AssemblyReference.cache
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.GeneratedMSBuildEditorConfig.editorconfig
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.AssemblyInfoInputs.cache
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.AssemblyInfo.cs
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.csproj.CoreCompileInputs.cache
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.csproj.CopyComplete
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.dll
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\refint\superagent.dll
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.pdb
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\superagent.genruntimeconfig.cache
+F:\projects\my game\vs\my_game\obj\Debug\net6.0\ref\superagent.dll
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\HP.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\7b7a77326a6dd440fcfc10263bc80132.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\backGame.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\gameover.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\menu.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\pause.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\search.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\task.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Enemies\enemy.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\hero.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Interface\Searching\First\notebook.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Interface\Searching\First\redKey.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Interface\Searching\First\verevka.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\2D\Objects\chest.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Audio\music.ogg
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Audio\music.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Audio\удар.ogg
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Audio\удар.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Fonts\CollectChests.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Fonts\End.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Fonts\File.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Fonts\GameOver.xnb
+F:\projects\my game\vs\my_game\bin\Debug\net6.0\Content\Fonts\Score.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\backGame.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\gameover.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\menu.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\pause.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\search.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Backgrounds\task.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Enemies\enemy.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\hero.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Interface\Searching\First\notebook.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Interface\Searching\First\redKey.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Interface\Searching\First\verevka.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\2D\Objects\chest.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\7b7a77326a6dd440fcfc10263bc80132.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Audio\music.ogg
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Audio\music.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Audio\удар.ogg
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Audio\удар.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Fonts\CollectChests.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Fonts\End.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Fonts\File.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Fonts\GameOver.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\Fonts\Score.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\HP.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\text.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\герой.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\backGame.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\chest.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\enemy.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\gameover.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\hero.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\menu.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\music.ogg
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\music.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\pause.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\search.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\search1\notebook.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\search1\redKey.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\search1\verevka.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\task.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\удар.ogg
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\Content\удар.xnb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\superagent.exe
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\superagent.deps.json
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\superagent.runtimeconfig.json
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\superagent.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\superagent.pdb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\MonoGame.Framework.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\linux-x64\native\libopenal.so.1
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\osx\native\libSDL2.dylib
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\osx\native\libopenal.1.dylib
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\win-x64\native\SDL2.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\win-x64\native\soft_oal.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\win-x86\native\SDL2.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\bin\Debug\net6.0\runtimes\win-x86\native\soft_oal.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.csproj.AssemblyReference.cache
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.AssemblyInfoInputs.cache
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.AssemblyInfo.cs
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.csproj.CoreCompileInputs.cache
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.csproj.CopyComplete
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\refint\superagent.dll
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.pdb
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\superagent.genruntimeconfig.cache
+C:\Users\Пользователь\Desktop\nenich_game-main\my_game\obj\Debug\net6.0\ref\superagent.dll

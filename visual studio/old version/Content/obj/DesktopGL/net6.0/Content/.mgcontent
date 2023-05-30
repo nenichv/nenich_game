@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/backGame.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/chest.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/enemy.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/gameover.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/hero.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/menu.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/music.mp3</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/pause.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/search.jpeg</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/search1/notebook.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/search1/redKey.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/search1/verevka.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/task.png</File>
+    <File>C:/Users/Пользователь/Desktop/nenich_game-main/my_game/Content/удар.mp3</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/backGame.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/gameover.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/menu.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/pause.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/search.jpeg</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/task.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Enemies/enemy.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/hero.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Interface/Searching/First/notebook.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Interface/Searching/First/redKey.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Interface/Searching/First/verevka.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/2D/Objects/chest.png</File>
+    <File>F:/projects/my game/vs/my_game/Content/Audio/music.mp3</File>
+    <File>F:/projects/my game/vs/my_game/Content/Audio/удар.mp3</File>
+    <File>F:/projects/my game/vs/my_game/Content/Fonts/CollectChests.spritefont</File>
+    <File>F:/projects/my game/vs/my_game/Content/Fonts/End.spritefont</File>
+    <File>F:/projects/my game/vs/my_game/Content/Fonts/File.spritefont</File>
+    <File>F:/projects/my game/vs/my_game/Content/Fonts/GameOver.spritefont</File>
+    <File>F:/projects/my game/vs/my_game/Content/Fonts/Score.spritefont</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

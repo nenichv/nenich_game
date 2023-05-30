@@ -1,0 +1,15 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"F:/projects/my game/vs/my_game/Content/backGame.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/backGame.xnb","TextureProcessor","Texture2DContent",1081233,1440685,0,3450093
+"F:/projects/my game/vs/my_game/Content/chest.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/chest.xnb","TextureProcessor","Texture2DContent",21970,2580085,0,1859015
+"F:/projects/my game/vs/my_game/Content/enemy.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/enemy.xnb","TextureProcessor","Texture2DContent",24066,2235685,0,1919733
+"F:/projects/my game/vs/my_game/Content/gameover.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/gameover.xnb","TextureProcessor","Texture2DContent",2950745,2949205,0,1892642
+"F:/projects/my game/vs/my_game/Content/hero.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/hero.xnb","TextureProcessor","Texture2DContent",1254044,1253125,0,1046767
+"F:/projects/my game/vs/my_game/Content/menu.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/menu.xnb","TextureProcessor","Texture2DContent",6914585,6912085,0,5055048
+"F:/projects/my game/vs/my_game/Content/music.mp3","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/music.xnb","SongProcessor","SongContent",2400547,123,4,123255
+"F:/projects/my game/vs/my_game/Content/pause.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/pause.xnb","TextureProcessor","Texture2DContent",4113243,4111445,0,2894044
+"F:/projects/my game/vs/my_game/Content/search.jpeg","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/search.xnb","TextureProcessor","Texture2DContent",201754,8847445,0,5717614
+"F:/projects/my game/vs/my_game/Content/search1/notebook.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/search1/notebook.xnb","TextureProcessor","Texture2DContent",145268,5966485,0,374396
+"F:/projects/my game/vs/my_game/Content/search1/redKey.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/search1/redKey.xnb","TextureProcessor","Texture2DContent",62043,4111445,0,2934577
+"F:/projects/my game/vs/my_game/Content/search1/verevka.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/search1/verevka.xnb","TextureProcessor","Texture2DContent",907504,3891285,0,2502131
+"F:/projects/my game/vs/my_game/Content/task.png","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/task.xnb","TextureProcessor","Texture2DContent",17557,4111445,0,2719665
+"F:/projects/my game/vs/my_game/Content/удар.mp3","F:/projects/my game/vs/my_game/Content/bin/DesktopGL/удар.xnb","SongProcessor","SongContent",2297,126,0,2365358
