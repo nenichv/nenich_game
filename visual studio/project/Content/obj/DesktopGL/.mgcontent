@@ -4,27 +4,37 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/backGame.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/gameover.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/menu.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/pause.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/search.jpeg</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Backgrounds/task.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Enemies/enemy.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/hero.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Interface/Searching/First/notebook.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Interface/Searching/First/redKey.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Interface/Searching/First/verevka.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/2D/Objects/chest.png</File>
-    <File>F:/projects/my game/vs/my_game/Content/Audio/music.mp3</File>
-    <File>F:/projects/my game/vs/my_game/Content/Audio/удар.mp3</File>
-    <File>F:/projects/my game/vs/my_game/Content/Fonts/CollectChests.spritefont</File>
-    <File>F:/projects/my game/vs/my_game/Content/Fonts/End.spritefont</File>
-    <File>F:/projects/my game/vs/my_game/Content/Fonts/File.spritefont</File>
-    <File>F:/projects/my game/vs/my_game/Content/Fonts/GameOver.spritefont</File>
-    <File>F:/projects/my game/vs/my_game/Content/Fonts/Score.spritefont</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/backGame.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/gameover.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/menu.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/pause.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/search.jpeg</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/searchFirstLevel.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/searchFourLevel.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/searchSecondLevel.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/searchThirdLevel.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/task.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Enemies/enemy.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/hero.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/First/flashlight.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/First/notebook.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Four/verevka.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Second/phone.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Third/redKey.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Objects/chest.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/Audio/music.mp3</File>
+    <File>F:/projects/my project/visual studio/project/Content/Fonts/CollectChests.spritefont</File>
+    <File>F:/projects/my project/visual studio/project/Content/Fonts/End.spritefont</File>
+    <File>F:/projects/my project/visual studio/project/Content/Fonts/File.spritefont</File>
+    <File>F:/projects/my project/visual studio/project/Content/Fonts/GameOver.spritefont</File>
+    <File>F:/projects/my project/visual studio/project/Content/Fonts/Score.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

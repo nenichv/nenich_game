@@ -17,8 +17,9 @@ namespace superagent
         public override void Update()
         {
             var positionMouse = Mouse.GetState().Position;
-            if ((positionMouse.X < Position.X + SizeTexture.X && positionMouse.X > Position.X) && (positionMouse.Y < Position.Y + SizeTexture.Y && positionMouse.Y > Position.Y) && 
-                GeneralVariable.Keyboard.State.IsKeyDown(Keys.W)) Found = true;
+            if (positionMouse.X < Position.X + SizeTexture.X && positionMouse.X > Position.X && positionMouse.Y < Position.Y + SizeTexture.Y && positionMouse.Y > Position.Y && 
+                GeneralVariable.Mouse.LeftClick()) 
+                Found = true;
 
         }
 
@@ -27,9 +28,9 @@ namespace superagent
             if (!Found) base.Draw();
             if (Found)
             {
-                if (foundFlag < 5)
+                if (foundFlag < 20)
                 {
-                    base.Draw(Color.Red);
+                    base.Draw(Color.Green);
                     foundFlag++;
                 }
             }

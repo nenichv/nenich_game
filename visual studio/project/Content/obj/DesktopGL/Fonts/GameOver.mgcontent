@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/projects/my game/vs/my_game/Content/Fonts/GameOver.spritefont</SourceFile>
+  <SourceFile>F:/projects/my project/visual studio/project/Content/Fonts/GameOver.spritefont</SourceFile>
   <SourceTime>2022-07-26T16:44:10+05:00</SourceTime>
-  <DestFile>F:/projects/my game/vs/my_game/Content/bin/DesktopGL/Fonts/GameOver.xnb</DestFile>
-  <DestTime>2023-05-29T08:31:04.4014248+05:00</DestTime>
+  <DestFile>F:/projects/my project/visual studio/project/Content/bin/DesktopGL/Fonts/GameOver.xnb</DestFile>
+  <DestTime>2023-06-01T00:59:11.2738079+05:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

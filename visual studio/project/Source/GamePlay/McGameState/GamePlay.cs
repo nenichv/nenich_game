@@ -19,21 +19,21 @@ namespace superagent
             TextCollectChests = GeneralVariable.Content.Load<SpriteFont>("Fonts\\CollectChests");
             TextHP = GeneralVariable.Content.Load<SpriteFont>("Fonts\\File");
             Background = GeneralVariable.Content.Load<Texture2D>(path);
-            BackSize = new Rectangle(0, 90, 800, 600);
+            BackSize = new Rectangle(0, 35, 800, 600);
         }
 
         public void Update(World world)
         {
             world.Update();
 
-            if (world.Hero.HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.Enter) & world.Hero.Score >= 40) && (world.Hero.Position.X > 1600) && (world.Hero.Position.Y > 500 || world.Hero.Position.Y > 600))
+            if (world.Hero.HP <= 0 || (Keyboard.GetState().IsKeyDown(Keys.V) & world.Hero.Score >= 40) && (world.Hero.Position.X > 600) && (world.Hero.Position.Y > 250 || world.Hero.Position.Y < 300))
             {
                 MediaPlayer.Pause();
-                McGameState.state = GameState.EndOfGame;
+                GameStateControl.state = GameState.EndOfGame;
             }
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Escape)) McGameState.state = GameState.Pause;
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.X)) McGameState.state = GameState.Task;
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.E) && world.Hero.ChestCollisionFlag) McGameState.state = GameState.Searching;
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Escape)) GameStateControl.state = GameState.Pause;
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.T)) GameStateControl.state = GameState.Task;
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.E) && world.Hero.ChestCollisionFlag) GameStateControl.state = GameState.Searching;
         }
 
         public void Draw(World world)
@@ -41,9 +41,9 @@ namespace superagent
             
             GeneralVariable.SpriteBatch.Draw(Background, BackSize, null,
                 Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0);
-            GeneralVariable.SpriteBatch.DrawString(TextScore, "Score:" + world.Hero.Score, new Vector2(1620, 1300), Color.White);
-            GeneralVariable.SpriteBatch.DrawString(TextCollectChests, "Your task: collect chests and find exit!", new Vector2(400, 20), Color.White);
-            GeneralVariable.SpriteBatch.DrawString(TextScore, "HP:" + world.Hero.HP, new Vector2(10, 1300), Color.White);
+            GeneralVariable.SpriteBatch.DrawString(TextScore, "Score:" + world.Hero.Score, new Vector2(700, 645), Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+            GeneralVariable.SpriteBatch.DrawString(TextCollectChests, "Collect chests and find exit!", new Vector2(225, 10), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            GeneralVariable.SpriteBatch.DrawString(TextScore, "HP:" + world.Hero.HP, new Vector2(20, 645), Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
             world.Draw();
         }
     }

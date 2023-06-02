@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace superagent
 {
@@ -11,22 +11,40 @@ namespace superagent
         public List<SearchiObj> Objects;
         Texture2D Background;
         Rectangle BackSize;
+        bool objectIsFind;
 
-        public Searching(string path, string[] names)
+        public Searching(string path, string folder, string[] names)
         {
-            var folder = "2D\\Interface\\Searching\\First\\";
             Background = GeneralVariable.Content.Load<Texture2D>(path);
-            BackSize = new Rectangle(0, 90, 800, 600);
+            BackSize = new Rectangle(0, 35, 800, 600);
             Objects = new List<SearchiObj>();
-            for (int i = 0; i < names.Length; i++)
-                Objects.Add(new SearchiObj(names[i], folder, new Vector2(300, 200), new Vector2(64, 64)));
+
+            for (int obj = 0; obj < names.Length; obj++)
+                Objects.Add(new SearchiObj(names[obj], folder, RandomizePosition(), RandomizeSize()));
+        }
+
+        public Vector2 RandomizePosition()
+        {
+            var random = new Random();
+            return new Vector2(random.Next(30, 600), random.Next(30, 600));
+        }
+
+        public Vector2 RandomizeSize()
+        {
+            var random = new Random();
+            return new Vector2(random.Next(24, 48), random.Next(24, 48));
         }
 
         public void Update()
         {
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Enter)) McGameState.state = GameState.GamePlay;
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Enter) && objectIsFind) GameStateControl.state = GameState.GamePlay;
+
             foreach (var obj in Objects)
+            {
                 obj.Update();
+                if (!obj.Found) objectIsFind = false;
+                else objectIsFind = true;
+            }
         }
 
         public void Draw()

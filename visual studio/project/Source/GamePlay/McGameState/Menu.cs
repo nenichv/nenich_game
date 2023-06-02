@@ -12,12 +12,12 @@ namespace superagent
         public Menu(string path) 
         {
             Background = GeneralVariable.Content.Load<Texture2D>(path);
-            BackSize = new Rectangle(0, 90, 800, 600);
+            BackSize = new Rectangle(0, 35, 800, 600);
         }
 
         public void Update()
         {
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Space)) McGameState.state = GameState.Task;
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Space)) GameStateControl.state = GameState.Task;
             if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Escape)) Main.CloseGame = true;
         }
 

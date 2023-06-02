@@ -11,7 +11,7 @@ namespace superagent
         GraphicsDeviceManager graphics;
         World world;
         Song music;
-        McGameState GameStates;
+        GameStateControl GameStates;
         public static bool CloseGame = false;
 
         public Main()
@@ -24,7 +24,7 @@ namespace superagent
         protected override void Initialize()
         {
             graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferHeight = 670;
             graphics.ApplyChanges();
             base.Initialize();
         }
@@ -33,12 +33,13 @@ namespace superagent
         {
             GeneralVariable.SpriteBatch = new SpriteBatch(GraphicsDevice);
             GeneralVariable.Content = Content;
-            GeneralVariable.Keyboard = new McKeyboard();
+            GeneralVariable.Keyboard = new KeyboardControl();
+            GeneralVariable.Mouse = new MouseControl();
             GeneralVariable.WindowWidth = Window.ClientBounds.Width;
             GeneralVariable.WindowHeight = Window.ClientBounds.Height;
 
             world = new World(new Vector2(200, 250), new Vector2(200, 400), new Vector2(630, 250), new Vector2(630, 400));
-            GameStates = new McGameState();
+            GameStates = new GameStateControl();
 
             var enemiesPositions = new List<Vector2>() { new Vector2(150, 300), new Vector2(425, 150) };
             var enemiesMovementLogic = new List<Func<Vector2, float, Vector2>>()
@@ -47,7 +48,6 @@ namespace superagent
                 (position, speed) => { position.Y += speed; return position; }
             };
             world.CreateEnemies(enemiesPositions, new Vector2(64, 64), enemiesMovementLogic);
-            //тут создается и обновляется сразу все: сундуки, игрок и враги. а через запятую перечислены позиции сундуков. 4 позиции - четыре сундука.
 
             music = GeneralVariable.Content.Load<Song>("Audio\\music");
             MediaPlayer.Play(music);
@@ -62,9 +62,11 @@ namespace superagent
         protected override void Update(GameTime gameTime)
         {
             GeneralVariable.Keyboard.Update();
+            GeneralVariable.Mouse.Update();
             GameStates.Update(world);
             if (CloseGame) Exit();
             GeneralVariable.Keyboard.UpdateOld();
+            GeneralVariable.Mouse.UpdateOld();
             base.Update(gameTime);
         }
 

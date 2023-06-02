@@ -4,23 +4,22 @@ using System.Collections.Generic;
 
 namespace superagent
 {
-    public class McGameState
+    public class GameStateControl
     {
         public Menu Menu;
         public Task Task;
         public GamePlay GamePlay;
-        public Searching Searching;
         public Pause Pause;
         public EndOfGame EndOfGame;
+        public static int ChestIndex;
 
         public static GameState state = GameState.Menu;
 
-        public McGameState()
+        public GameStateControl()
         {
             Menu = new Menu("2D\\Backgrounds\\menu");
             Task = new Task("2D\\Backgrounds\\task");
             GamePlay = new GamePlay("2D\\Backgrounds\\backGame");
-            Searching = new Searching("2D\\Backgrounds\\search", new string[] {"notebook", "redKey", "verevka"});
             Pause = new Pause("2D\\Backgrounds\\pause");
             EndOfGame = new EndOfGame("2D\\Backgrounds\\gameover");
         }
@@ -39,7 +38,7 @@ namespace superagent
                     GamePlay.Update(world);
                     break;
                 case GameState.Searching:
-                    Searching.Update();
+                    world.Levels[ChestIndex].Update();
                     break;
                 case GameState.Pause:
                     Pause.Update();
@@ -64,7 +63,7 @@ namespace superagent
                     GamePlay.Draw(world);
                     break;
                 case GameState.Searching:
-                    Searching.Draw();
+                    world.Levels[ChestIndex].Draw();
                     break;
                 case GameState.Pause:
                     Pause.Draw();

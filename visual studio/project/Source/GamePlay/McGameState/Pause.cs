@@ -12,12 +12,12 @@ namespace superagent
         public Pause(string path)
         {
             Background = GeneralVariable.Content.Load<Texture2D>(path);
-            BackSize = new Rectangle(0, 90, 800, 600);
+            BackSize = new Rectangle(0, 35, 800, 600);
         }
 
         public void Update()
         {
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Escape)) McGameState.state = GameState.GamePlay;
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.Escape)) GameStateControl.state = GameState.GamePlay;
         }
 
         public void Draw()

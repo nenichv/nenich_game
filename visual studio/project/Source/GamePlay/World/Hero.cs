@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace superagent
 {
@@ -17,6 +19,7 @@ namespace superagent
         public double Score;
         public bool EnemyCollisionFlag;
         public bool ChestCollisionFlag;
+        private bool damageFlag;
 
         public Hero(string path, Vector2 pos, Vector2 dims) : base(path, pos, dims) // здесь и происходит присвоение. Мы передаем в конструктор класса
                                                                                     // какие то значения пути к картинке, позиции и размера, и он сам присвает их полям texture,
@@ -46,36 +49,48 @@ namespace superagent
             if (Position.Y > GeneralVariable.WindowHeight - SizeTexture.Y / 2)
                 Position.Y = GeneralVariable.WindowHeight - SizeTexture.Y / 2;
 
-            if (EnemyCollisionFlag) HP -= 1;
+            damageFlag = !EnemyCollisionFlag ? true : false;
             ScoreUpdate();
             base.Update();
         }
 
-        public bool CollisionUpdate(Vector2 dimension, IEnumerable<Vector2> positions)
+        public bool CollisionUpdate(Vector2 dimension, Vector2 position)
         {
-            foreach (var enemy in positions)
-            {
-                Rectangle heroRect = new Rectangle((int)Position.X, (int)Position.Y, (int)base.SizeTexture.X, (int)base.SizeTexture.Y);
-                Rectangle objectRect = new Rectangle((int)enemy.X, (int)enemy.Y, (int)dimension.X, (int)dimension.Y);
-                if (heroRect.Intersects(objectRect)) return true;
-            }
+            Rectangle heroRect = new Rectangle((int)Position.X, (int)Position.Y, (int)base.SizeTexture.X, (int)base.SizeTexture.Y);
+            Rectangle objectRect = new Rectangle((int)position.X, (int)position.Y, (int)dimension.X, (int)dimension.Y);
+            if (heroRect.Intersects(objectRect)) return true;
             return false;
         }
 
         public void EnemyCollision(Vector2 dimension, IEnumerable<Vector2> positions)
         {
-            EnemyCollisionFlag = CollisionUpdate(dimension, positions);
+            foreach (var enemy in positions)
+            {
+                EnemyCollisionFlag = CollisionUpdate(dimension, enemy);
+                if (EnemyCollisionFlag)
+                {
+                    if (damageFlag) HP -= 5;
+                    break;
+                }
+            }
         }
 
-        public void ChestsCollision(Vector2 dimension, IEnumerable<Vector2> positions)
+        public void ChestsCollision(Vector2 dimension, Chest[] chests)
         {
-            ChestCollisionFlag = CollisionUpdate(dimension, positions);
+            for (int i = 0; i < chests.Length; i++)
+            {
+                ChestCollisionFlag = CollisionUpdate(dimension, chests[i].Position);
+                if (ChestCollisionFlag)
+                {
+                    GameStateControl.ChestIndex = i; break;
+                }
+            }
         }
 
         public void ScoreUpdate()
         {
             if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.E) && ChestCollisionFlag) 
-                Score += 5;
+                Score += 10;
         }
 
         public override void Draw()
