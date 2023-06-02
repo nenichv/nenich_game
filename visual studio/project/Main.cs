@@ -38,16 +38,12 @@ namespace superagent
             GeneralVariable.WindowWidth = Window.ClientBounds.Width;
             GeneralVariable.WindowHeight = Window.ClientBounds.Height;
 
-            world = new World(new Vector2(200, 250), new Vector2(200, 400), new Vector2(630, 250), new Vector2(630, 400));
+            world = new World(new Vector2(220, 240), new Vector2(220, 425), new Vector2(585, 240), new Vector2(585, 425));
             GameStates = new GameStateControl();
 
-            var enemiesPositions = new List<Vector2>() { new Vector2(150, 300), new Vector2(425, 150) };
-            var enemiesMovementLogic = new List<Func<Vector2, float, Vector2>>()
-            {
-                (position, speed) => { position.X += speed; return position; },
-                (position, speed) => { position.Y += speed; return position; }
-            };
-            world.CreateEnemies(enemiesPositions, new Vector2(64, 64), enemiesMovementLogic);
+            var enemiesPositions = new List<Vector2>() { new Vector2(500, 500), new Vector2(300, 150) };
+            
+            world.CreateEnemies(enemiesPositions, new Vector2(64, 64));
 
             music = GeneralVariable.Content.Load<Song>("Audio\\music");
             MediaPlayer.Play(music);

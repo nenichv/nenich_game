@@ -21,33 +21,28 @@ namespace superagent
         public bool ChestCollisionFlag;
         private bool damageFlag;
 
-        public Hero(string path, Vector2 pos, Vector2 dims) : base(path, pos, dims) // здесь и происходит присвоение. Мы передаем в конструктор класса
-                                                                                    // какие то значения пути к картинке, позиции и размера, и он сам присвает их полям texture,
-                                                                                    // position и dimension. Мы это не пишем, но компилятор все делает.
-                                                                                    // base - ключевое слово наследуемого класса. То есть, написав base(path, pos, dims)
-                                                                                    // мы грубо говоря написали Basic2D(path, pos, dims) и т.д. 
+        public Hero(string path, Vector2 pos, Vector2 dims) : base(path, pos, dims)
         {
             Speed = 3f; HP = 100; Score = 0;
         }
 
-
         public override void Update()
         {
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.A))
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.A) && Position.X > 100)
                 Position.X -= Speed;
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.D))
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.D) && Position.X < 700)
                 Position.X += Speed;
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.W))
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.W) && Position.Y > 150)
                 Position.Y -= Speed;
-            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.S))
+            if (GeneralVariable.Keyboard.State.IsKeyDown(Keys.S) && Position.Y < 500)
                 Position.Y += Speed;
 
-            if (Position.X < 0) Position.X = 0;
-            if (Position.Y < 0) Position.Y = 0;
-            if (Position.X > GeneralVariable.WindowWidth - SizeTexture.X / 2)
-                Position.X = GeneralVariable.WindowWidth - SizeTexture.X / 2;
-            if (Position.Y > GeneralVariable.WindowHeight - SizeTexture.Y / 2)
-                Position.Y = GeneralVariable.WindowHeight - SizeTexture.Y / 2;
+            if (Position.X < 0) Position.X = 100;
+            if (Position.Y < 0) Position.Y = 100;
+            if (Position.X > GeneralVariable.WindowWidth - SizeTexture.X)
+                Position.X = GeneralVariable.WindowWidth - SizeTexture.X;
+            if (Position.Y > GeneralVariable.WindowHeight - SizeTexture.Y)
+                Position.Y = GeneralVariable.WindowHeight - SizeTexture.Y;
 
             damageFlag = !EnemyCollisionFlag ? true : false;
             ScoreUpdate();
@@ -93,10 +88,10 @@ namespace superagent
                 Score += 10;
         }
 
-        public override void Draw()
+        public override void Draw(Vector2 offset)
         {
-            if (EnemyCollisionFlag) base.Draw(Color.Red);
-            else base.Draw();
+            if (EnemyCollisionFlag) base.Draw(offset, Color.Red);
+            else base.Draw(offset);
         }
     }
 }

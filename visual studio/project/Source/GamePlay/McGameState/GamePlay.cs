@@ -38,11 +38,9 @@ namespace superagent
 
         public void Draw(World world)
         {
-            
-            GeneralVariable.SpriteBatch.Draw(Background, BackSize, null,
-                Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0);
-            GeneralVariable.SpriteBatch.DrawString(TextScore, "Score:" + world.Hero.Score, new Vector2(700, 645), Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
-            GeneralVariable.SpriteBatch.DrawString(TextCollectChests, "Collect chests and find exit!", new Vector2(225, 10), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            GeneralVariable.SpriteBatch.Draw(Background, BackSize, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0);
+            GeneralVariable.SpriteBatch.DrawString(TextScore, "Очки:" + world.Hero.Score, new Vector2(700, 645), Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+            GeneralVariable.SpriteBatch.DrawString(TextCollectChests, "Уровень сложности 1", new Vector2(300, 10), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
             GeneralVariable.SpriteBatch.DrawString(TextScore, "HP:" + world.Hero.HP, new Vector2(20, 645), Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
             world.Draw();
         }

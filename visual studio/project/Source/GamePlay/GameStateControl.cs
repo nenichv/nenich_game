@@ -63,9 +63,10 @@ namespace superagent
                     GamePlay.Draw(world);
                     break;
                 case GameState.Searching:
-                    world.Levels[ChestIndex].Draw();
+                    world.Levels[ChestIndex].Draw(world.Offset);
                     break;
                 case GameState.Pause:
+                    GamePlay.Draw(world);
                     Pause.Draw();
                     break;
                 case GameState.EndOfGame:

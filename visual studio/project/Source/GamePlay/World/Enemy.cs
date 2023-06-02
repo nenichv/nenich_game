@@ -6,24 +6,21 @@ namespace superagent
 {
     public class Enemy : Basic2D
     {
-        private Func<Vector2, float, Vector2> movementUpdate;
         public float Speed;
 
-        public Enemy(string path, Vector2 pos, Vector2 dims, Func<Vector2, float, Vector2> movementLogic) : base(path, pos, dims)
+        public Enemy(string path, Vector2 pos, Vector2 dims) : base(path, pos, dims)
         {
-            movementUpdate = movementLogic;
-            Speed = 7f;
+            Speed = 1.5f;
         }
 
-        public override void Update()
+        public virtual void Update(Hero Hero)
         {
-            Position = movementUpdate(Position, Speed);
-            if (Position.Y > 560 || Position.Y < 100 || Position.X > 760 || Position.X < 100) Speed *= -1;
+            Position += GeneralVariable.Movement(Position, Hero.Position, Speed);
         }
 
-        public override void Draw()
+        public override void Draw(Vector2 offset)
         {
-            base.Draw();
+            base.Draw(offset);
         }
     }
 }

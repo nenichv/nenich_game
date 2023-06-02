@@ -24,13 +24,13 @@ namespace superagent
 
         public void Draw(World world)
         {
-            var positionScore = new Vector2(250, 300);
-            var positionConclusion = new Vector2(100, 250);
+            var positionScore = new Vector2(300, 300);
+            var positionConclusion = new Vector2(350, 250);
             GeneralVariable.SpriteBatch.Draw(Background, BackSize, null,
                 Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0);
-            GeneralVariable.SpriteBatch.DrawString(TextEnd, "You gained " + world.Hero.Score + " points!", positionScore, Color.WhiteSmoke);
-            if (world.Hero.Score >= 40) GeneralVariable.SpriteBatch.DrawString(TextEnd, "Congratulations! The first level is passed! ", positionConclusion, Color.WhiteSmoke);
-            else GeneralVariable.SpriteBatch.DrawString(TextEnd, "You lose! Press the X to exit!", positionConclusion, Color.WhiteSmoke);
+            GeneralVariable.SpriteBatch.DrawString(TextEnd, "Ты набрал " + world.Hero.Score + " очков!", positionScore, Color.WhiteSmoke);
+            if (world.Hero.Score >= 40) GeneralVariable.SpriteBatch.DrawString(TextEnd, "Поздравляем!", positionConclusion, Color.WhiteSmoke);
+            else GeneralVariable.SpriteBatch.DrawString(TextEnd, "Ты проиграл! Нажми Escape, чтобы выйти из игры.", positionConclusion, Color.WhiteSmoke);
         }
     }
 }

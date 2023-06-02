@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:2D/Backgrounds/backGame.png
 
+#begin 2D/Backgrounds/darkness.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2D/Backgrounds/darkness.png
+
 #begin 2D/Backgrounds/gameover.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -36,6 +48,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2D/Backgrounds/gameover.png
+
+#begin 2D/Backgrounds/grid.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2D/Backgrounds/grid.png
 
 #begin 2D/Backgrounds/menu.png
 /importer:TextureImporter
@@ -169,18 +193,6 @@
 /processorParam:TextureFormat=Color
 /build:2D/Interface/Searching/First/flashlight.png
 
-#begin 2D/Interface/Searching/First/notebook.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:2D/Interface/Searching/First/notebook.png
-
 #begin 2D/Interface/Searching/Four/verevka.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -192,6 +204,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2D/Interface/Searching/Four/verevka.png
+
+#begin 2D/Interface/Searching/Second/notebook.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2D/Interface/Searching/Second/notebook.png
 
 #begin 2D/Interface/Searching/Second/phone.png
 /importer:TextureImporter

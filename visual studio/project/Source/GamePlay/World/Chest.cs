@@ -15,9 +15,9 @@ namespace superagent
             base.Update();
         }
 
-        public override void Draw()
+        public override void Draw(Vector2 offset)
         {
-            base.Draw();
+            base.Draw(offset);
         }
     }
 }

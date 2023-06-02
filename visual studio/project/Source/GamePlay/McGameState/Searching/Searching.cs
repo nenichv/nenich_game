@@ -11,14 +11,14 @@ namespace superagent
         public List<SearchiObj> Objects;
         Texture2D Background;
         Rectangle BackSize;
-        bool objectIsFind;
+        public bool objectIsFind;
 
         public Searching(string path, string folder, string[] names)
         {
             Background = GeneralVariable.Content.Load<Texture2D>(path);
             BackSize = new Rectangle(0, 35, 800, 600);
             Objects = new List<SearchiObj>();
-
+            
             for (int obj = 0; obj < names.Length; obj++)
                 Objects.Add(new SearchiObj(names[obj], folder, RandomizePosition(), RandomizeSize()));
         }
@@ -26,13 +26,13 @@ namespace superagent
         public Vector2 RandomizePosition()
         {
             var random = new Random();
-            return new Vector2(random.Next(30, 600), random.Next(30, 600));
+            return new Vector2(random.Next(10, 600), random.Next(10, 600));
         }
 
         public Vector2 RandomizeSize()
         {
             var random = new Random();
-            return new Vector2(random.Next(24, 48), random.Next(24, 48));
+            return new Vector2(random.Next(16, 128), random.Next(16, 128));
         }
 
         public void Update()
@@ -42,17 +42,18 @@ namespace superagent
             foreach (var obj in Objects)
             {
                 obj.Update();
+
                 if (!obj.Found) objectIsFind = false;
                 else objectIsFind = true;
             }
         }
 
-        public void Draw()
+        public void Draw(Vector2 offset)
         {
             GeneralVariable.SpriteBatch.Draw(Background, BackSize, null,
                 Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0);
             foreach (var obj in Objects)
-                obj.Draw();
+                obj.Draw(offset);
         }
     }
 }

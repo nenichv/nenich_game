@@ -37,15 +37,15 @@ namespace superagent
 
         }
 
-        public virtual void Draw()
+        public virtual void Draw(Vector2 offset)
         {
-            GeneralVariable.SpriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, (int)SizeTexture.X, (int)SizeTexture.Y), null, 
+            GeneralVariable.SpriteBatch.Draw(Texture, new Rectangle((int)(Position.X + offset.X), (int)(Position.Y + offset.Y), (int)SizeTexture.X, (int)SizeTexture.Y), null, 
                 Color.White, 0.0f, new Vector2(Texture.Width / 2, Texture.Height / 2), SpriteEffects.None, 0);
         }
 
-        public virtual void Draw(Color color)
+        public virtual void Draw(Vector2 offset, Color color)
         {
-            GeneralVariable.SpriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, (int)SizeTexture.X, (int)SizeTexture.Y), null,
+            GeneralVariable.SpriteBatch.Draw(Texture, new Rectangle((int)(Position.X + offset.X), (int)(Position.Y + offset.Y), (int)SizeTexture.X, (int)SizeTexture.Y), null,
                 color , 0.0f, new Vector2(Texture.Width / 2, Texture.Height / 2), SpriteEffects.None, 0);
         }
     }

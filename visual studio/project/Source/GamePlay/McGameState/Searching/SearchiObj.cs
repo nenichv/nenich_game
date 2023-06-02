@@ -23,14 +23,14 @@ namespace superagent
 
         }
 
-        public override void Draw()
+        public override void Draw(Vector2 offset)
         {
-            if (!Found) base.Draw();
+            if (!Found) base.Draw(offset);
             if (Found)
             {
                 if (foundFlag < 20)
                 {
-                    base.Draw(Color.Green);
+                    base.Draw(offset, Color.Green);
                     foundFlag++;
                 }
             }

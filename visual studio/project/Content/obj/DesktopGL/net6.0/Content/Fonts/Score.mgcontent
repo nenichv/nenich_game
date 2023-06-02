@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>F:/projects/my project/visual studio/project/Content/Fonts/Score.spritefont</SourceFile>
-  <SourceTime>2023-04-23T19:31:31.6296726+05:00</SourceTime>
+  <SourceTime>2023-06-02T16:34:29.0438417+05:00</SourceTime>
   <DestFile>F:/projects/my project/visual studio/project/Content/bin/DesktopGL/Content/Fonts/Score.xnb</DestFile>
-  <DestTime>2023-05-31T23:49:45.831123+05:00</DestTime>
+  <DestTime>2023-06-02T16:34:31.8395728+05:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

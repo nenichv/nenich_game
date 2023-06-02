@@ -5,7 +5,9 @@
   <Config />
   <SourceFiles>
     <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/backGame.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/darkness.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/gameover.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/grid.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/menu.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/pause.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/search.jpeg</File>
@@ -17,8 +19,8 @@
     <File>F:/projects/my project/visual studio/project/Content/2D/Enemies/enemy.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/hero.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/First/flashlight.png</File>
-    <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/First/notebook.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Four/verevka.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Second/notebook.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Second/phone.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Third/redKey.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Objects/chest.png</File>
@@ -30,6 +32,8 @@
     <File>F:/projects/my project/visual studio/project/Content/Fonts/Score.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
