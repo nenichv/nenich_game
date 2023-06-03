@@ -26,12 +26,7 @@ namespace superagent
 
         public virtual void Update(Vector2 offset)
         {
-            CurrentHoverSlot = GetSlotFromPixel(new Vector2(GeneralVariable.Mouse.newMousePosition.X, GeneralVariable.Mouse.newMousePosition.Y), - offset);
-        }
-
-        public virtual Vector2 GetPositionFromLocation(Vector2 location)
-        {
-            return PhysicalStartPos + new Vector2((int)location.X * SlotDims.X, (int)location.Y * SlotDims.Y);
+            CurrentHoverSlot = ...
         }
 
         public virtual GridLocation GetSlotFromLocation(Vector2 location)
@@ -45,11 +40,7 @@ namespace superagent
         public virtual Vector2 GetSlotFromPixel(Vector2 pixel, Vector2 offset)
         {
             Vector2 adjustedPos = pixel - PhysicalStartPos + offset;
-            var tempVec = new Vector2(
-                Math.Min(Math.Max(0, (int)(adjustedPos.X / SlotDims.X)), Slots.Count - 1), 
-                Math.Min(Math.Max(0, (int)(adjustedPos.Y / SlotDims.Y)), Slots[0].Count - 1));
-
-            return tempVec;
+            ...
         }
 
         public virtual void SetBaseGrid()
