@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace superagent
@@ -20,13 +19,12 @@ namespace superagent
             if (positionMouse.X < Position.X + SizeTexture.X && positionMouse.X > Position.X && positionMouse.Y < Position.Y + SizeTexture.Y && positionMouse.Y > Position.Y && 
                 GeneralVariable.Mouse.LeftClick()) 
                 Found = true;
-
         }
 
         public override void Draw(Vector2 offset)
         {
             if (!Found) base.Draw(offset);
-            if (Found)
+            else
             {
                 if (foundFlag < 20)
                 {

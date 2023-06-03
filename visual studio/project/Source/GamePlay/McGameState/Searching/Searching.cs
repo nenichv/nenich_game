@@ -9,7 +9,7 @@ namespace superagent
     public class Searching
     {
         public List<SearchiObj> Objects;
-        Texture2D Background;
+        readonly Texture2D Background;
         Rectangle BackSize;
         public bool objectIsFind;
 
@@ -23,13 +23,13 @@ namespace superagent
                 Objects.Add(new SearchiObj(names[obj], folder, RandomizePosition(), RandomizeSize()));
         }
 
-        public Vector2 RandomizePosition()
+        public static Vector2 RandomizePosition()
         {
             var random = new Random();
             return new Vector2(random.Next(10, 600), random.Next(10, 600));
         }
 
-        public Vector2 RandomizeSize()
+        public static Vector2 RandomizeSize()
         {
             var random = new Random();
             return new Vector2(random.Next(16, 128), random.Next(16, 128));

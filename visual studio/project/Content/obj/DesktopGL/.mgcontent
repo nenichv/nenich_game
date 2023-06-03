@@ -17,13 +17,14 @@
     <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/searchThirdLevel.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Backgrounds/task.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Enemies/enemy.png</File>
-    <File>F:/projects/my project/visual studio/project/Content/2D/hero.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/First/flashlight.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Four/verevka.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Second/notebook.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Second/phone.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Interface/Searching/Third/redKey.png</File>
     <File>F:/projects/my project/visual studio/project/Content/2D/Objects/chest.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Objects/drone.png</File>
+    <File>F:/projects/my project/visual studio/project/Content/2D/Objects/heroNew.png</File>
     <File>F:/projects/my project/visual studio/project/Content/Audio/music.mp3</File>
     <File>F:/projects/my project/visual studio/project/Content/Fonts/CollectChests.spritefont</File>
     <File>F:/projects/my project/visual studio/project/Content/Fonts/End.spritefont</File>
@@ -32,6 +33,7 @@
     <File>F:/projects/my project/visual studio/project/Content/Fonts/Score.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

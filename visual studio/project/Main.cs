@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
 
 namespace superagent 
@@ -41,8 +40,12 @@ namespace superagent
             world = new World(new Vector2(220, 240), new Vector2(220, 425), new Vector2(585, 240), new Vector2(585, 425));
             GameStates = new GameStateControl();
 
-            var enemiesPositions = new List<Vector2>() { new Vector2(500, 500), new Vector2(300, 150) };
-            
+            var enemiesPositions = new List<Vector2>() 
+            { 
+                new Vector2(500, 150), new Vector2(500, 350), new Vector2(500, 500),
+                new Vector2(100, 500), new Vector2(350, 500), new Vector2(450, 500) 
+            };
+
             world.CreateEnemies(enemiesPositions, new Vector2(64, 64));
 
             music = GeneralVariable.Content.Load<Song>("Audio\\music");
@@ -57,6 +60,7 @@ namespace superagent
 
         protected override void Update(GameTime gameTime)
         {
+            GeneralVariable.GameTime = gameTime;
             GeneralVariable.Keyboard.Update();
             GeneralVariable.Mouse.Update();
             GameStates.Update(world);

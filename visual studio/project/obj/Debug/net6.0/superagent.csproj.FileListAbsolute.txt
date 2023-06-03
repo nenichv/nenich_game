@@ -162,7 +162,6 @@ F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Backgro
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Backgrounds\searchSecondLevel.xnb
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Backgrounds\searchThirdLevel.xnb
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Enemies\enemy.xnb
-F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\hero.xnb
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Interface\Searching\First\flashlight.xnb
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Interface\Searching\First\redKey.xnb
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Interface\Searching\First\verevka.xnb
@@ -183,3 +182,5 @@ F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Backgro
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Backgrounds\task.xnb
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Interface\Searching\Second\notebook.xnb
 F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Backgrounds\darkness.xnb
+F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Objects\heroNew.xnb
+F:\projects\my project\visual studio\project\bin\Debug\net6.0\Content\2D\Objects\drone.xnb

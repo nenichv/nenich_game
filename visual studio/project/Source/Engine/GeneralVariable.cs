@@ -2,11 +2,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace superagent
 {
+    public delegate void PassObject(object element);
+    public delegate object PassObjectAndReturn(object element);
+
     public class GeneralVariable
     {
         public static ContentManager Content;
@@ -14,6 +15,8 @@ namespace superagent
         public static KeyboardControl Keyboard;
         public static int WindowWidth, WindowHeight;
         public static MouseControl Mouse;
+        public static GameTime GameTime;
+        public static PassObject PassProjectile;
 
         public static float GetDistance(Vector2 position, Vector2 goal)
         {

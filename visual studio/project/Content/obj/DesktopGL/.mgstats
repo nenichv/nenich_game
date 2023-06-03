@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"F:/projects/my project/visual studio/project/Content/2D/Backgrounds/darkness.png","F:/projects/my project/visual studio/project/Content/bin/DesktopGL/2D/Backgrounds/darkness.xnb","TextureProcessor","Texture2DContent",2241495,2240085,0,4010652
+"F:/projects/my project/visual studio/project/Content/2D/Objects/drone.png","F:/projects/my project/visual studio/project/Content/bin/DesktopGL/2D/Objects/drone.xnb","TextureProcessor","Texture2DContent",10510,10085,0,2507869
